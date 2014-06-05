@@ -1,5 +1,4 @@
-﻿using HLP.Comum.Model.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
@@ -17,6 +16,8 @@ namespace HLP.SQLAnalyse.Model.Repository
         {
             conn = new SqlConnection(sString);
         }
+
+        public OperacoesSqlRepository() { }
 
         public static DataTable GetServer()
         {
@@ -41,6 +42,34 @@ namespace HLP.SQLAnalyse.Model.Repository
                 throw ex;
             }
         }
+
+
+        public static DataSet GetDatabases(string connectionString)
+        {
+            try
+            {
+                SqlConnection connection = new SqlConnection();
+                connection.ConnectionString = connectionString;
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter();
+
+                da.SelectCommand = new SqlCommand("SELECT name FROM sys.Databases", connection);
+                da.Fill(ds, "sys.Databases");
+                connection.Close();
+                return ds;
+
+            }
+            catch (Exception)
+            {
+                return new DataSet();
+            }
+        }
+
+
         public static bool TestConnection(string connectionString)
         {
             bool ret = false;

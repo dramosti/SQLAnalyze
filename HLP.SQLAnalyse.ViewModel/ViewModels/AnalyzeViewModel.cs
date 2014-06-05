@@ -1,5 +1,4 @@
 ﻿using HLP.Base.ClassesBases;
-using HLP.Comum.Model.Models;
 using HLP.SQLAnalyse.Model;
 using HLP.SQLAnalyse.ViewModel.Commands;
 using System;
@@ -17,19 +16,27 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
         public ICommand TestarCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand NextCommand { get; set; }
+        public ICommand TpAnalyseCommand { get; set; }
         public ICommand AnalyzeCommand { get; set; }
 
+        public string tpAnalyze { get; set; }
+
+        public AnalyzeViewModel()
+        {
+            this.currentModel = new AnalyzeTableModel();
+            command = new AnalyzeCommand(ViewModel: this);
+        }
 
         public AnalyzeCommand command { get; set; }
 
-        private ConnectionConfigModel _currentConexao;
+        private ConnectionConfigModel _currentConexao = new ConnectionConfigModel();
         public ConnectionConfigModel currentConexao
         {
             get { return _currentConexao; }
-            set { _currentConexao = value; }
+            set { _currentConexao = value; base.NotifyPropertyChanged("currentConexao"); }
         }
 
-        private ObservableCollection<string> _servers = new ObservableCollection<string>();
+        private ObservableCollection<string> _servers;
         public ObservableCollection<string> servers
         {
             get { return _servers; }
@@ -40,13 +47,19 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
             }
         }
 
-
-        public AnalyzeViewModel()
+        private ObservableCollection<string> _bases;
+        public ObservableCollection<string> bases
         {
-            this.currentModel = new AnalyzeTableModel();
-            command = new AnalyzeCommand(ViewModel: this);
-
+            get { return _bases; }
+            set
+            {
+                _bases = value;
+                base.NotifyPropertyChanged(propertyName: "bases");
+            }
         }
+
+
+      
 
     }
 }

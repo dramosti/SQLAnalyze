@@ -1,9 +1,11 @@
 ﻿<Window x:Class="HLP.SQLAnalyse.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"                
+        xmlns:converter="clr-namespace:HLP.SQLAnalyse.View.Converter"
+        x:Name="winConexao"
         Title="" Height="465" Width="350" AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.Resources>
-
+        <converter:NotBoolConverter x:Key="NotBoolConverter"/>
         <Style x:Key="TextBoxLogin" TargetType="{x:Type TextBox}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -361,8 +363,8 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
-        
+
+
         <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFFFFFFF"/>
         <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF707070"/>
         <Style x:Key="OptionMarkFocusVisual">
@@ -842,6 +844,9 @@
             </Setter>
         </Style>
 
+
+
+
     </Window.Resources>
 
     <Grid>
@@ -909,23 +914,34 @@
                 </Grid.ColumnDefinitions>
 
 
-                <ComboBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,8" Height="20" IsEditable="True" Text="Selecione o Servidor" Style="{DynamicResource ComboBoxStyle1}">
-                    <ComboBoxItem Content="Lucas"></ComboBoxItem>
-                    <ComboBoxItem Content="Vieira"></ComboBoxItem>
-                    <ComboBoxItem Content="Hernandez"></ComboBoxItem>
-                    <ComboBoxItem Content="Mazetto"></ComboBoxItem>
+                <ComboBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,8" Height="20" IsEditable="True" Text="Selecione o Servidor" Style="{DynamicResource ComboBoxStyle1}"
+                          ItemsSource="{Binding servers}"
+                          SelectedValue="{Binding currentConexao.xServerName, Mode=TwoWay, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
                 </ComboBox>
                 <TextBlock Grid.Column="1" Grid.Row="2" Text="Authentication" Height="20" Margin="0,0,0,8" Foreground="#FFB9B9B9" FontFamily="Segoe Ui Light"/>
-                <CheckBox Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,0,8" Style="{DynamicResource CheckBoxStyle1}" Width="56"/>
-                <TextBox Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Margin="0,0,0,8" Style="{DynamicResource TextBoxLogin}"/>
-                <TextBox Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Margin="0,0,0,8" SelectionBrush="#FF76FF04" Style="{DynamicResource Senha}"/>
-                <ComboBox Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Margin="0,0,0,8" Height="20" IsEditable="True" IsReadOnly="True" Text="Selecione a Base de Dados" Style="{DynamicResource ComboBoxStyle1}"/>
+                <CheckBox 
+                    x:Name="cbxAuthentication"                    
+                     IsChecked="{Binding currentConexao.Autentication, Mode=TwoWay, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                    Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,0,8" Style="{DynamicResource CheckBoxStyle1}" Width="56"/>
+                <TextBox 
+                    IsEnabled="{Binding ElementName=cbxAuthentication, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=LostFocus,ValidatesOnDataErrors=True, NotifyOnValidationError=True, Converter={StaticResource NotBoolConverter}}"
+                    Text="{Binding currentConexao.xLogin, Mode=TwoWay, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                    Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Margin="0,0,0,8" Style="{DynamicResource TextBoxLogin}"/>
+                <TextBox 
+                    IsEnabled="{Binding ElementName=cbxAuthentication, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=LostFocus,ValidatesOnDataErrors=True, NotifyOnValidationError=True, Converter={StaticResource NotBoolConverter}}"
+                    x:Name="txtPassword"
+                    Text="{Binding currentConexao.xPassword, Mode=TwoWay, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                    Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Margin="0,0,0,8" SelectionBrush="#FF76FF04" Style="{DynamicResource Senha}"/>
+                <ComboBox 
+                    ItemsSource="{Binding bases}" 
+                    SelectedValue="{Binding currentConexao.xBaseDados, Mode=TwoWay, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                    Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Margin="0,0,0,8" Height="20" IsEditable="True" IsReadOnly="True" Text="Selecione a Base de Dados" Style="{DynamicResource ComboBoxStyle1}"/>
                 <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" Height="20" Margin="0,0,0,8">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Height="20" Width="85" HorizontalAlignment="Left" Content="Adicionar" Style="{DynamicResource Button_ADICIONAR}"></Button>
+                    <Button Command="{Binding AddCommand}" Height="20" Width="85" HorizontalAlignment="Left" Content="Adicionar" Style="{DynamicResource Button_ADICIONAR}"></Button>
                 </Grid>
             </Grid>
             <Grid Grid.Row="3">
@@ -935,8 +951,17 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-
-                <ListBox Grid.Column="1" Grid.ColumnSpan="2" Height="44" Margin="0,0,0,8" Style="{DynamicResource ListBox_CONEXOES}">
+                <ListBox 
+                    ItemsSource="{Binding currentModel.conexoes}"                    
+                    SelectedValue="{Binding xBaseDados , Mode=TwoWay, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                    Grid.Column="1" Grid.ColumnSpan="2" Height="44" Margin="0,0,0,8" Style="{DynamicResource ListBox_CONEXOES}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel>
+                                <TextBlock Text="{Binding xBaseDados }"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                 </ListBox>
             </Grid>
             <Grid Grid.Row="4">
@@ -961,11 +986,11 @@
                         <RowDefinition Height="Auto" MaxHeight="23"></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <RadioButton Grid.Row="1" Grid.Column="1" Height="20" Margin="0,0,0,3" Content="Tables" Style="{DynamicResource RadioButton_CONEXAO}"></RadioButton>
-                    <RadioButton Grid.Row="2" Grid.Column="1" Height="20" Margin="0,0,0,3" Content="Views" Style="{DynamicResource RadioButton_CONEXAO}"></RadioButton>
-                    <RadioButton Grid.Row="3" Grid.Column="1" Height="20" Margin="0,0,0,3" Content="Procedures" Style="{DynamicResource RadioButton_CONEXAO}"></RadioButton>
-                    <RadioButton Grid.Row="4" Grid.Column="1" Height="20" Margin="0,0,0,3" Content="Constrains" Style="{DynamicResource RadioButton_CONEXAO}"></RadioButton>
-                    <Button Height="20" Grid.Column="3" Grid.Row="3" Width="85" Content="Prosseguir" HorizontalAlignment="Right" Style="{DynamicResource Button_PROSSEGUIR}" Grid.RowSpan="2"/>
+                    <RadioButton Command="{Binding TpAnalyseCommand}" CommandParameter="Table" Grid.Row="1" Grid.Column="1" Height="20" Margin="0,0,0,3" Content="Tables" Style="{DynamicResource RadioButton_CONEXAO}"></RadioButton>
+                    <RadioButton Command="{Binding TpAnalyseCommand}" CommandParameter="View" Grid.Row="2" Grid.Column="1" Height="20" Margin="0,0,0,3" Content="Views" Style="{DynamicResource RadioButton_CONEXAO}"></RadioButton>
+                    <RadioButton Command="{Binding TpAnalyseCommand}" CommandParameter="Procedure" Grid.Row="3" Grid.Column="1" Height="20" Margin="0,0,0,3" Content="Procedures" Style="{DynamicResource RadioButton_CONEXAO}"></RadioButton>
+                    <RadioButton Command="{Binding TpAnalyseCommand}" CommandParameter="Constrain" Grid.Row="4" Grid.Column="1" Height="20" Margin="0,0,0,3" Content="Constrains" Style="{DynamicResource RadioButton_CONEXAO}"></RadioButton>
+                    <Button Command="{Binding NextCommand}"  CommandParameter="{Binding ElementName=winConexao}" Height="20" Grid.Column="3" Grid.Row="3" Width="85" Content="Prosseguir" HorizontalAlignment="Right" Style="{DynamicResource Button_PROSSEGUIR}" Grid.RowSpan="2"/>
 
                 </Grid>
                 <Border Background="#FFCCCCCC" Height="0.6" Grid.Row="1" VerticalAlignment="Bottom"/>
