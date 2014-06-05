@@ -16,7 +16,8 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
     {
         public ICommand TestarCommand { get; set; }
         public ICommand AddCommand { get; set; }
-        public ICommand ProsseguirCommand { get; set; }
+        public ICommand NextCommand { get; set; }
+        public ICommand AnalyzeCommand { get; set; }
 
 
         public AnalyzeCommand command { get; set; }

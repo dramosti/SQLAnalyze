@@ -15,6 +15,7 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
     {
         public AnalyzeViewModel ViewModel { get; set; }
         public BackgroundWorker bWorkerTables;
+        public BackgroundWorker bWorkerAnalyseTable;
         OperacoesSqlRepository operacao;
 
         public AnalyzeCommand(AnalyzeViewModel ViewModel)
@@ -23,25 +24,66 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
             bWorkerTables = new BackgroundWorker();
 
             this.ViewModel.AddCommand = new RelayCommand(execute: i => this.AddConexao(),
-             canExecute: i => CanTesteAndADD());
+                   canExecute: i => CanTesteAndADD());
             this.ViewModel.TestarCommand = new RelayCommand(execute: i => this.TestConnection(),
-            canExecute: i => CanTesteAndADD());
-            //this.ViewModel.ProsseguirCommand
+                   canExecute: i => CanTesteAndADD());
+            this.ViewModel.NextCommand = new RelayCommand(execute: i => this.Next(tpAnalyse: i),
+                   canExecute: i => CanTesteAndADD());
 
             // Pesquisa servidores SQL
             this.ViewModel.bWorkerPesquisa.DoWork += bWorkerPesquisa_DoWork;
             this.ViewModel.bWorkerPesquisa.RunWorkerAsync();
-
             this.bWorkerTables.DoWork += bWorkerTables_DoWork;
+        }
+
+
+        private void ExecAnalyze()
+        {
+            this.ViewModel.currentModel.ExecuteAnalyse();
+        }
+
+        private bool CanExecAnalyze()
+        {
+            return this.ViewModel.currentModel.lTablePrincipal.Where(c => c.isSelect).Count() > 0;
+        }
+
+
+        private void Next(object tpAnalyse)
+        {
+            switch (tpAnalyse.ToString())
+            {
+                case "Tabelas": this.bWorkerTables.RunWorkerAsync();
+                    break;
+            }
 
         }
+        private bool CanNext()
+        {
+            return this.ViewModel.currentModel.conexoes.Count == 2;
+        }
+
 
         void bWorkerTables_DoWork(object sender, DoWorkEventArgs e)
         {
-            operacao = new OperacoesSqlRepository(this.ViewModel.currentModel.conexoes.FirstOrDefault().ConnectionStringCompleted);
-            this.ViewModel.currentModel.lTablePrincipal = new System.Collections.ObjectModel.ObservableCollection<Model.TableModel>(operacao.GetTabelas());
-            operacao = new OperacoesSqlRepository(this.ViewModel.currentModel.conexoes.LastOrDefault().ConnectionStringCompleted);
-            this.ViewModel.currentModel.lTableSecudary = operacao.GetTabelas();
+            try
+            {
+                operacao = new OperacoesSqlRepository(this.ViewModel.currentModel.conexoes.FirstOrDefault().ConnectionStringCompleted);
+                this.ViewModel.currentModel.lTablePrincipal = new System.Collections.ObjectModel.ObservableCollection<Model.TableModel>(operacao.GetTabelas());
+                foreach (var table in this.ViewModel.currentModel.lTablePrincipal)
+                {
+                    table.lField = operacao.GetDetalhes(table.xTable);
+                }
+                operacao = new OperacoesSqlRepository(this.ViewModel.currentModel.conexoes.LastOrDefault().ConnectionStringCompleted);
+                this.ViewModel.currentModel.lTableSecudary = operacao.GetTabelas();
+                foreach (var table in this.ViewModel.currentModel.lTablePrincipal)
+                {
+                    table.lField = operacao.GetDetalhes(table.xTable);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         private void bWorkerPesquisa_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)

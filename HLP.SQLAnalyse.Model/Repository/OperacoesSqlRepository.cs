@@ -72,7 +72,7 @@ namespace HLP.SQLAnalyse.Model.Repository
         public List<TableModel> GetTabelas()
         {
             List<TableModel> lret = new List<TableModel>();
-            
+
             if (conn != null)
                 try
                 {
@@ -86,10 +86,10 @@ namespace HLP.SQLAnalyse.Model.Repository
                     adapter.Fill(dt);
 
                     lret = (from r in dt.AsEnumerable()
-                                            select new TableModel
-                                            {
-                                                xTable = r["TABLE_NAME"].ToString()
-                                            }).ToList();
+                            select new TableModel
+                            {
+                                xTable = r["TABLE_NAME"].ToString()
+                            }).ToList();
 
                 }
                 catch (SqlException se)
@@ -100,13 +100,13 @@ namespace HLP.SQLAnalyse.Model.Repository
                 {
                     conn.Close();
                 }
-            return lret; 
+            return lret;
 
         }
 
-        public List<InfTabelaModel> GetDetalhes(string sNomeTabela)
+        public List<FieldModel> GetDetalhes(string sNomeTabela)
         {
-            List<InfTabelaModel> _tabelasDetalhes = new List<InfTabelaModel>();
+            List<FieldModel> _tabelasDetalhes = new List<FieldModel>();
             if (conn != null)
                 try
                 {
@@ -123,16 +123,14 @@ namespace HLP.SQLAnalyse.Model.Repository
                     foreach (DataRow row in dt.Rows)
                     {
 
-                        _tabelasDetalhes.Add(new InfTabelaModel
+                        _tabelasDetalhes.Add(new FieldModel
                         {
-                            NomeTabela = row[2].ToString(),
-                            TabelaOwner = row[1].ToString(),
-                            NomeColuna = row[3].ToString(),
-                            TipoColuna = row[5].ToString(),
-                            Tamanho = row[7].ToString(),
-                            CasasDecimais = row[8].ToString(),
-                            Precisao = row[6].ToString(),
-                            IsNullable = row[10].ToString()
+                            xField = row[3].ToString(),
+                            xTypeName = row[5].ToString(),
+                            xTamanho = row[7].ToString(),
+                            xCasasDecimais = row[8].ToString(),
+                            xPrecisao = row[6].ToString(),
+                            isNotNul = (row[10].ToString() == "0" ? true : false)
                         });
                     }
                     dt.Dispose();
