@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HLP.SQLAnalyze.Model", "..\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HLP.SQLAnalyze.ViewModel", "..\HLP.SQLAnalyse.ViewModel\HLP.SQLAnalyze.ViewModel.csproj", "{3EAB1C65-339E-428B-B878-12A22FB14A19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HLP.SQLAnalyze.Services", "..\HLP.SQLAnalyse.Services\HLP.SQLAnalyze.Services.csproj", "{9F696489-6026-4A09-A500-37B67D904136}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{3EAB1C65-339E-428B-B878-12A22FB14A19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EAB1C65-339E-428B-B878-12A22FB14A19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EAB1C65-339E-428B-B878-12A22FB14A19}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9F696489-6026-4A09-A500-37B67D904136}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9F696489-6026-4A09-A500-37B67D904136}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9F696489-6026-4A09-A500-37B67D904136}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9F696489-6026-4A09-A500-37B67D904136}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
