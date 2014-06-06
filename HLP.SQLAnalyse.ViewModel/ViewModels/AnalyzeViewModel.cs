@@ -30,6 +30,9 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
         {
             this.currentModel = new AnalyzeTableModel();
             command = new AnalyzeCommand(ViewModel: this);
+            this.currentConexao.xLogin = "SA";
+            this.currentConexao.xPassword = "H029060tSql";
+
         }
 
         public AnalyzeCommand command { get; set; }
@@ -72,7 +75,7 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
             set { _currentConexao = value; base.NotifyPropertyChanged("currentConexao"); }
         }
 
-        private ObservableCollection<string> _servers;
+        private ObservableCollection<string> _servers = new ObservableCollection<string>();
         public ObservableCollection<string> servers
         {
             get { return _servers; }
@@ -106,7 +109,11 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
             if (e.Key == Key.Delete)
             {
                 if (this.lTableSelected.Count() > 0)
+                {
+                    ((TableModel)(sender as ListBox).SelectedItem).isSelect = false;
                     this.lTableSelected.Remove((TableModel)(sender as ListBox).SelectedItem);
+                    
+                }
             }
         }
 

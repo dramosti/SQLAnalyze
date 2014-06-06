@@ -914,7 +914,7 @@
                 </Grid.ColumnDefinitions>
 
 
-                <ComboBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,8" Height="20" IsEditable="True" Text="Selecione o Servidor" Style="{DynamicResource ComboBoxStyle1}"
+                <ComboBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,8" Height="20" IsEditable="True" Style="{DynamicResource ComboBoxStyle1}"
                           ItemsSource="{Binding servers}"
                           SelectedValue="{Binding currentConexao.xServerName, Mode=TwoWay, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
                 </ComboBox>

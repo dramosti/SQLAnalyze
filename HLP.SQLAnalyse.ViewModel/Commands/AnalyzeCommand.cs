@@ -26,6 +26,9 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
             this.ViewModel = ViewModel;
             bWorkerTables = new BackgroundWorker();
 
+            this.ViewModel.servers.Add("SEARCHING SERVERS SQL . . .");
+            this.ViewModel.currentConexao.xServerName = "SEARCHING SERVERS SQL . . .";
+
             this.ViewModel.AddCommand = new RelayCommand(execute: i => this.AddConexao(),
                    canExecute: i => CanTesteAndADD());
             this.ViewModel.TestarCommand = new RelayCommand(execute: i => this.TestConnection(),
@@ -44,7 +47,8 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
             // Pesquisa servidores SQL
             this.ViewModel.bWorkerPesquisa.DoWork += bWorkerPesquisa_DoWork;
             this.ViewModel.bWorkerPesquisa.RunWorkerAsync();
-            this.bWorkerTables.DoWork += bWorkerTables_DoWork;           
+            this.bWorkerTables.DoWork += bWorkerTables_DoWork;
+
         }
 
 
@@ -123,7 +127,7 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
                 this.ViewModel.lTableSelected.Add(table);
             }
         }
-        
+
 
 
         void bWorkerTables_DoWork(object sender, DoWorkEventArgs e)
@@ -170,6 +174,11 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
                             c => c["ServerName"].ToString() + (c["instanceName"].ToString() != "" ? (@"\" + c["instanceName"].ToString()) : "")
                         )
                         .ToList());
+                    System.Threading.Thread.Sleep(100);
+                    if (this.ViewModel.servers.Count() > 0)
+                    {
+                        this.ViewModel.currentConexao.xServerName = this.ViewModel.servers.FirstOrDefault();
+                    }
                 }
             }
             catch (Exception ex)
