@@ -24,33 +24,39 @@ namespace HLP.SQLAnalyse.Model
             }
         }
 
+
+        private string _xTipo;
         public string xTipo
         {
-            get
+            get { return _xTipo; }
+            set
             {
-                switch (this.xTypeName.ToUpper())
-                {
-                    case "INT":
-                    case "INT IDENTITY":
-                        {
-                            return "int";
-                        }
-                    case "DECIMAL": return string.Format("DECIMAL ({0},{1})", this.xPrecisao, this.xCasasDecimais);
-                    case "VARCHAR": return string.Format("VARCHAR ({0})", this.xTamanho);
-                    case "DATE": return "DATE";
-                    case "BIT": return "BIT";
-                    case "TINYINT": return "TINYINT";
-                    case "TIME": return "TIME";
-                    default: return "";
-                }
+                _xTipo = value;
+                base.NotifyPropertyChanged(propertyName: "xTipo");
             }
         }
 
-        private bool _isNotNul = false;
+        public void SetxTipo()
+        {
+            switch (this.xTypeName.ToUpper())
+            {
+                case "INT":
+                case "INT IDENTITY":
+                    {
+                        this.xTipo = "int";
+                    } break;
+                case "DECIMAL": this.xTipo = string.Format("DECIMAL ({0},{1})", this.xPrecisao, this.xCasasDecimais); break;
+                case "VARCHAR": this.xTipo = string.Format("VARCHAR ({0})", this.xTamanho); break;
+                case "DATE": this.xTipo = "DATE"; break;
+                case "BIT": this.xTipo = "BIT"; break;
+                case "TINYINT": this.xTipo = "TINYINT"; break;
+                case "TIME": this.xTipo = "TIME"; break;
+                default: this.xTipo = ""; break;
+            }
 
+        }
 
         private string _xTypeName;
-
         public string xTypeName
         {
             get { return _xTypeName; }
@@ -73,20 +79,13 @@ namespace HLP.SQLAnalyse.Model
         }
 
         private string _xPrecisao;
-
         public string xPrecisao
         {
             get { return _xPrecisao; }
             set { _xPrecisao = value; }
         }
 
-
-
-
-
-
-
-
+        private bool _isNotNul = false;
         public bool isNotNul
         {
             get { return _isNotNul; }

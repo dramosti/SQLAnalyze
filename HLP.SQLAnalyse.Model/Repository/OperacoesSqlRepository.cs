@@ -148,11 +148,10 @@ namespace HLP.SQLAnalyse.Model.Repository
 
                     SqlDataAdapter da = new SqlDataAdapter(command);
                     da.Fill(dt);
-
+                    FieldModel objField;
                     foreach (DataRow row in dt.Rows)
                     {
-
-                        _tabelasDetalhes.Add(new FieldModel
+                        objField = new FieldModel
                         {
                             xField = row[3].ToString(),
                             xTypeName = row[5].ToString(),
@@ -160,7 +159,9 @@ namespace HLP.SQLAnalyse.Model.Repository
                             xCasasDecimais = row[8].ToString(),
                             xPrecisao = row[6].ToString(),
                             isNotNul = (row[10].ToString() == "0" ? true : false)
-                        });
+                        };
+                        objField.SetxTipo();
+                        _tabelasDetalhes.Add(objField);
                     }
                     dt.Dispose();
 
