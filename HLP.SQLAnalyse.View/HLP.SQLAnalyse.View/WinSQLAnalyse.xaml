@@ -102,6 +102,104 @@
             </Setter>
         </Style>
 
+        <Style x:Key="Button_IMPRIMIR" TargetType="{x:Type Button}">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="Storyboard1">
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border">
+                                    <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FFB9B9B9"></EasingColorKeyFrame>
+                                </ColorAnimationUsingKeyFrames>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="path">
+                                    <EasingColorKeyFrame KeyTime="0:0:0.3" Value="White"></EasingColorKeyFrame>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Key="Storyboard2">
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#FFB9B9B9"></EasingColorKeyFrame>
+                                    <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FF626262"></EasingColorKeyFrame>
+                                </ColorAnimationUsingKeyFrames>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="path">
+                                    <EasingColorKeyFrame KeyTime="0" Value="White"></EasingColorKeyFrame>
+                                    <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FFB9B9B9"></EasingColorKeyFrame>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+                        <Border x:Name="border" Background="Transparent" SnapsToDevicePixels="true">
+                            <Grid>
+                                <Path x:Name="path" Width="14" Height="14"  Stretch="Fill" Fill="#FFB9B9B9" Data="F1 M 25,27L 25,17L 51,17L 51,27L 47,27L 47,21L 29,21L 29,27L 25,27 Z M 16,28L 60,28L 60,51L 52,51L 52,46L 55,46L 55,33L 21,33L 21,46L 24,46L 24,51L 16,51L 16,28 Z M 25,39L 28,39L 28,52L 35,52L 35,59L 48,59L 48,39L 51,39L 51,62L 33,62L 25,54L 25,39 Z M 46,55L 38,55L 38,52L 46,52L 46,55 Z M 46,49L 30,49L 30,46L 46,46L 46,49 Z M 46,43L 30,43L 30,40L 46,40L 46,43 Z"/>
+                                <ContentPresenter Grid.Column="1" x:Name="contentPresenter" TextElement.Foreground="#FFB9B9B9" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard x:Name="Storyboard2_BeginStoryboard" Storyboard="{StaticResource Storyboard2}"/>
+                                </Trigger.ExitActions>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
+                                </Trigger.EnterActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="Button_VOLTAR" TargetType="{x:Type Button}">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="Storyboard1">
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border">
+                                    <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FFB9B9B9"></EasingColorKeyFrame>
+                                </ColorAnimationUsingKeyFrames>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="path">
+                                    <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FF0072C6"></EasingColorKeyFrame>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Key="Storyboard2">
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#FFB9B9B9"></EasingColorKeyFrame>
+                                    <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FF626262"></EasingColorKeyFrame>
+                                </ColorAnimationUsingKeyFrames>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="path">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#FF0072C6"></EasingColorKeyFrame>
+                                    <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FFB9B9B9"></EasingColorKeyFrame>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+                        <Border x:Name="border" Background="Transparent" SnapsToDevicePixels="true">
+                            <Grid>
+                                <Path x:Name="path" Width="14" Height="9"  Stretch="Fill" Fill="#FFB9B9B9" Data="F1 M 57,42L 57,34L 32.25,34L 42.25,24L 31.75,24L 17.75,38L 31.75,52L 42.25,52L 32.25,42L 57,42 Z"/>
+                                <ContentPresenter Grid.Column="1" x:Name="contentPresenter" TextElement.Foreground="#FFB9B9B9" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard x:Name="Storyboard2_BeginStoryboard" Storyboard="{StaticResource Storyboard2}"/>
+                                </Trigger.ExitActions>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
+                                </Trigger.EnterActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="TextBox_TABLES" TargetType="{x:Type TextBox}">
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Foreground" Value="#FFB9B9B9"/>
@@ -147,6 +245,7 @@
                 </MultiTrigger>
             </Style.Triggers>
         </Style>
+        
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -184,7 +283,9 @@
                                 <ColumnDefinition Width="20"></ColumnDefinition>
                                 <ColumnDefinition Width="20"></ColumnDefinition>
                                 <ColumnDefinition Width="20"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
+                            <Border Grid.ColumnSpan="10" BorderThickness="0,0,0,1" BorderBrush="#FF5B7184"></Border>
                             <TextBlock Text="{Binding xField, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBlock>
                             <CheckBox Grid.Column="1" IsChecked="{Binding bxField, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></CheckBox>
                             <TextBlock Text="{Binding xTipo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="2"></TextBlock>
@@ -202,7 +303,7 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
         </Grid.RowDefinitions>
@@ -211,21 +312,26 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition Width="10"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Border Grid.ColumnSpan="3" Grid.RowSpan="6" BorderThickness="1" Background="#FF626262" BorderBrush="#FFB9B9B9"/>
+        <Border Grid.ColumnSpan="3" Grid.RowSpan="3" BorderThickness="1" Background="#FF626262" BorderBrush="#FFB9B9B9" MouseLeftButtonDown="Border_MouseLeftButtonDown"/>
 
         <Grid Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"></ColumnDefinition>
+                <ColumnDefinition Width="25"></ColumnDefinition>
+                <ColumnDefinition Width="25"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="25"></ColumnDefinition>
                 <ColumnDefinition Width="25"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" Style="{StaticResource Button_MINIMIZAR}" Margin="0,1,1,0"></Button>
-            <Button Grid.Column="2" Style="{StaticResource Button_FECHAR}" Margin="0,1,1,0"></Button>
+            <Button Grid.Column="1" Style="{StaticResource Button_VOLTAR}" Height="25" VerticalAlignment="Top" Margin="0,1,1,0"></Button>
+            <Button Grid.Column="2" Style="{StaticResource Button_IMPRIMIR}" Height="25" VerticalAlignment="Top" Margin="0,1,1,0"></Button>
+            <Button Grid.Column="4" Style="{StaticResource Button_MINIMIZAR}" Height="25" VerticalAlignment="Top" Margin="0,1,1,0"></Button>
+            <Button Grid.Column="5" Style="{StaticResource Button_FECHAR}" Height="25" VerticalAlignment="Top" Margin="0,1,1,0"></Button>
         </Grid>
 
         <Grid Grid.Column="1" Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="2"></ColumnDefinition>                
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
@@ -265,7 +371,7 @@
                 </ListBox>
             </Grid>
 
-            <GridSplitter ResizeDirection="Columns" Grid.Column="1" Height="497" VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="#FFB9B9B9" Width="2"></GridSplitter>
+            <GridSplitter ResizeDirection="Columns" Grid.Column="1" Height="482" VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="#FFB9B9B9" Width="2"></GridSplitter>
             
             <Grid Grid.Column="3" Margin="50,0,0,0" >
                 <Grid.RowDefinitions>
