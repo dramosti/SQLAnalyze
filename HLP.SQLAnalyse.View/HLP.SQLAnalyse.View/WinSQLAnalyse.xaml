@@ -161,6 +161,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition Width="10"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
@@ -174,22 +175,44 @@
             <Button Grid.Column="1" Style="{StaticResource Button_MINIMIZAR}" Margin="0,1,1,0"></Button>
             <Button Grid.Column="2" Style="{StaticResource Button_FECHAR}" Margin="0,1,1,0"></Button>
         </Grid>
-        <Grid Grid.Row="1" Grid.Column="1">
+        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBox Style="{DynamicResource TextBox_TABLES}" Text="Tables" Height="40" VerticalAlignment="Bottom"></TextBox>
+            <CheckBox Content="Selecionar todos" Grid.Column="1"/>
         </Grid>
 
-        <Grid Grid.Column="1" Grid.Row="3">
-            <ListBox Height="150">
+        <Grid Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3">
+            <ListBox Height="150" ItemsSource="{Binding currentModel.lTablePrincipal}" >
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Orientation="Vertical" Height="140" VerticalAlignment="Bottom"></WrapPanel>
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel LastChildFill="True">
+                            <CheckBox IsChecked="{Binding isSelect, Mode=TwoWay, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+                            <TextBlock Text="{Binding xTable }"/>
+                        </DockPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
+        </Grid>
+        <Grid Grid.Row="4" Grid.ColumnSpan="2">
+            <ListBox>
+                
+            </ListBox>
+            
+        </Grid>
+        <Grid Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="3">
+            <ListBox>
+
+            </ListBox>
+
         </Grid>
 
     </Grid>
