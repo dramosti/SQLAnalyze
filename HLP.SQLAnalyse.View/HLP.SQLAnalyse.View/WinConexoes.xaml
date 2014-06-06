@@ -13,7 +13,7 @@
                         <Grid>
                             <Border x:Name="border" Background="White" BorderBrush="#FFB9B9B9" CornerRadius="0" BorderThickness="1.3"/>
                             <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" Height="20" Foreground="#FF626262" Margin="2,0,0,0"/>
-                            <Label x:Name="WaterMarkLabel" Content="Usuário" Visibility="Collapsed" Foreground="#FF626262" FontSize="12" FontFamily="Segoe UI Light" Margin="2.334,-3.663,-2.329,-2.337"/>
+                            <Label x:Name="WaterMarkLabel" Content="User" Visibility="Collapsed" Foreground="#FF626262" FontSize="12" FontFamily="Segoe UI Light" Margin="2.334,-3.663,-2.329,-2.337"/>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -41,7 +41,7 @@
                         <Grid>
                             <Border x:Name="border" Background="White" BorderBrush="#FFB9B9B9" CornerRadius="0" BorderThickness="1.3"/>
                             <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" Height="20" Foreground="#FF626262" Margin="2,0,0,0"/>
-                            <Label x:Name="WaterMarkLabel" Content="Senha" Visibility="Collapsed" Foreground="#FF626262" FontSize="12" FontFamily="Segoe UI Light" Margin="2.334,-3.663,-2.329,-2.337"/>
+                            <Label x:Name="WaterMarkLabel" Content="Password" Visibility="Collapsed" Foreground="#FF626262" FontSize="12" FontFamily="Segoe UI Light" Margin="2.334,-3.663,-2.329,-2.337"/>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -941,7 +941,7 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Command="{Binding AddCommand}" Height="20" Width="85" HorizontalAlignment="Left" Content="Adicionar" Style="{DynamicResource Button_ADICIONAR}"></Button>
+                    <Button Command="{Binding AddCommand}" Height="20" Width="60" HorizontalAlignment="Left" Content="Add" Style="{DynamicResource Button_ADICIONAR}"></Button>
                 </Grid>
             </Grid>
             <Grid Grid.Row="3">
@@ -990,7 +990,7 @@
                     <RadioButton Command="{Binding TpAnalyseCommand}" CommandParameter="View" Grid.Row="2" Grid.Column="1" Height="20" Margin="0,0,0,3" Content="Views" Style="{DynamicResource RadioButton_CONEXAO}"></RadioButton>
                     <RadioButton Command="{Binding TpAnalyseCommand}" CommandParameter="Procedure" Grid.Row="3" Grid.Column="1" Height="20" Margin="0,0,0,3" Content="Procedures" Style="{DynamicResource RadioButton_CONEXAO}"></RadioButton>
                     <RadioButton Command="{Binding TpAnalyseCommand}" CommandParameter="Constrain" Grid.Row="4" Grid.Column="1" Height="20" Margin="0,0,0,3" Content="Constrains" Style="{DynamicResource RadioButton_CONEXAO}"></RadioButton>
-                    <Button Command="{Binding NextCommand}"  CommandParameter="{Binding ElementName=winConexao}" Height="20" Grid.Column="3" Grid.Row="3" Width="85" Content="Prosseguir" HorizontalAlignment="Right" Style="{DynamicResource Button_PROSSEGUIR}" Grid.RowSpan="2"/>
+                    <Button Command="{Binding NextCommand}"  CommandParameter="{Binding ElementName=winConexao}" Height="20" Grid.Column="3" Grid.Row="3" Width="70" Content="Next" HorizontalAlignment="Right" Style="{DynamicResource Button_PROSSEGUIR}" Grid.RowSpan="2"/>
 
                 </Grid>
                 <Border Background="#FFCCCCCC" Height="0.6" Grid.Row="1" VerticalAlignment="Bottom"/>
