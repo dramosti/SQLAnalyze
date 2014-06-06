@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace HLP.SQLAnalyse.ViewModel.Commands
 {
@@ -72,7 +73,7 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
         }
         private bool CanNext()
         {
-            return this.ViewModel.currentModel.conexoes.Count == 2 && this.ViewModel.tpAnalyze != "";
+            return this.ViewModel.currentModel.conexoes.Count == 2 && this.ViewModel.tpAnalyze != null;
         }
 
 
@@ -92,13 +93,15 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
                 {
                     table.lField = operacao.GetDetalhes(table.xTable);
                 }
-                ((Window)e.Argument).Visibility = Visibility.Hidden;
+                Application.Current.Dispatcher.BeginInvoke(
+                  DispatcherPriority.Background,
+                    new Action(() => ((Window)e.Argument).Visibility = Visibility.Hidden));
 
-                Base.Static.Sistema.ExecuteMethodByReflection
-                    (xNamespace: "HLP.SQLAnalyse.View",
+                Static.ExecuteMethodByReflection
+                    (xNamespace: "HLP.SQLAnalyse.View.exe",
                     xType: "WinSQLAnalyse",
                     xMethod: "ShowAnalyse",
-                    parameters: new object[] { ((object)e.Argument) });
+                    parameters: new object[] { ((object)e.Argument), this.ViewModel });
             }
             catch (Exception ex)
             {

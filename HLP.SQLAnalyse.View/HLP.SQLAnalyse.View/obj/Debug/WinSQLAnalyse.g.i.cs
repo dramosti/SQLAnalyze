@@ -67,25 +67,6 @@ namespace HLP.SQLAnalyse.View {
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
         void System.Windows.Markup.IComponentConnector.Connect(int connectionId, object target) {
-            switch (connectionId)
-            {
-            case 1:
-            
-            #line 126 "..\..\WinSQLAnalyse.xaml"
-            ((System.Windows.Controls.Button)(target)).Click += new System.Windows.RoutedEventHandler(this.Button_Click_1);
-            
-            #line default
-            #line hidden
-            return;
-            case 2:
-            
-            #line 127 "..\..\WinSQLAnalyse.xaml"
-            ((System.Windows.Controls.Button)(target)).Click += new System.Windows.RoutedEventHandler(this.Button_Click);
-            
-            #line default
-            #line hidden
-            return;
-            }
             this._contentLoaded = true;
         }
     }

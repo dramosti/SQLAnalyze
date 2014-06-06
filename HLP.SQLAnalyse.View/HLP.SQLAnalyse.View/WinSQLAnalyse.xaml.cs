@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HLP.SQLAnalyse.ViewModel.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,17 +21,27 @@ namespace HLP.SQLAnalyse.View
     public partial class WinSQLAnalyse : Window
     {
         Window WinPrincipal;
-        public WinSQLAnalyse(object WinPrincipal)
+        public WinSQLAnalyse(object WinPrincipal, AnalyzeViewModel ViewModel)
         {
             InitializeComponent();
+            this.ViewModel = ViewModel;
             this.WinPrincipal = WinPrincipal as Window;
         }
 
-        public static void ShowAnalyse(object WinPrincipal)
+        public AnalyzeViewModel ViewModel
         {
-            WinSQLAnalyse win = new WinSQLAnalyse(WinPrincipal);
-            win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            win.Show();
+            get { return this.DataContext as AnalyzeViewModel; }
+            set { this.DataContext = value; }
+        }
+
+        public static void ShowAnalyse(object WinPrincipal, object objViewModel)
+        {
+            Application.Current.Dispatcher.BeginInvoke((Action)(() =>
+           {
+               WinSQLAnalyse win = new WinSQLAnalyse(WinPrincipal, objViewModel as AnalyzeViewModel);
+               win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+               win.Show();
+           }));
         }
     }
 }
