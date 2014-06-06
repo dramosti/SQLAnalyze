@@ -185,13 +185,13 @@
                                 <ColumnDefinition Width="20"></ColumnDefinition>
                                 <ColumnDefinition Width="20"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="Lucas"></TextBlock>
+                            <TextBlock Text="{Binding xField, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBlock>
                             <CheckBox Grid.Column="1"></CheckBox>
-                            <TextBlock Text="Varchar(1000)" Grid.Column="2"></TextBlock>
+                            <TextBlock Text="{Binding xTipo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="2"></TextBlock>
                             <CheckBox Grid.Column="3"></CheckBox>
                             <TextBlock Text="Is not null" Grid.Column="4"></TextBlock>
-                            <CheckBox Grid.Column="5"></CheckBox>
-                            <TextBlock Text="000" Grid.Column="6"></TextBlock>
+                            <CheckBox Grid.Column="5" IsChecked="{Binding IsNotNull, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></CheckBox>
+                            <TextBlock Text="{Binding xTamanho, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="6"></TextBlock>
                             <CheckBox Grid.Column="7"></CheckBox>
                         </Grid>
                     </ControlTemplate>
@@ -308,8 +308,8 @@
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <TextBox Style="{DynamicResource TextBox_TABLES}" Text="Database 1 " Height="40" Margin="0,0,0,5" VerticalAlignment="Bottom"></TextBox>
-                        <ListBox Grid.Row="2">
-                            <ListBoxItem Style="{DynamicResource ListBoxItemCONEXOIES}">Lucas</ListBoxItem>
+                        <ListBox Grid.Row="2" ItemsSource="{Binding }">
+                            <ListBoxItem Style="{DynamicResource ListBoxItemCONEXOIES}"></ListBoxItem>
                         </ListBox>
                     </Grid>
 
