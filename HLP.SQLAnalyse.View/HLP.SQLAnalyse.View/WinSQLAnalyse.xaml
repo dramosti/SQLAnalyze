@@ -1,7 +1,7 @@
 ﻿<Window x:Class="HLP.SQLAnalyse.View.WinSQLAnalyse"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="WinSQLAnalyse" Height="380" Width="300" WindowState="Maximized">
+        Title="WinSQLAnalyse" Height="500" Width="1000" WindowState="Maximized">
     <Grid>
         
     </Grid>
