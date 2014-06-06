@@ -45,6 +45,34 @@ namespace HLP.SQLAnalyse.Model
             }
         }
 
+        
+        private TableModel _currentTablePrincipal = new TableModel();
+        public TableModel currentTablePrincipal
+        { 
+            get { return _currentTablePrincipal; }
+            set
+            {
+                _currentTablePrincipal = value;
+                base.NotifyPropertyChanged(propertyName: "currentTablePrincipal");
+            }
+        }
+
+        
+        private TableModel _currentTableSecundary = new TableModel();
+
+        public TableModel currentTableSecundary
+        {
+            get { return _currentTableSecundary; }
+            set
+            {
+                _currentTableSecundary = value;
+                base.NotifyPropertyChanged(propertyName: "currentTableSecundary");
+            }
+        }
+        
+        
+
+
         private ObservableCollection<TableModel> _lTableToSelect = new ObservableCollection<TableModel>();
         /// <summary>
         /// Lista de tabelas para ser manipulada e ficar a disposição de selecionar.

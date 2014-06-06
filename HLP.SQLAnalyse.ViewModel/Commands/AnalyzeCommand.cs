@@ -143,7 +143,7 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
                 this.ViewModel.currentModel.lTableToSelect = this.ViewModel.currentModel.lTablePrincipal;
                 operacao = new OperacoesSqlRepository(this.ViewModel.currentModel.conexoes.LastOrDefault().ConnectionStringCompleted);
                 this.ViewModel.currentModel.lTableSecudary = new System.Collections.ObjectModel.ObservableCollection<TableModel>(operacao.GetTabelas());
-                foreach (var table in this.ViewModel.currentModel.lTablePrincipal)
+                foreach (var table in this.ViewModel.currentModel.lTableSecudary)
                 {
                     table.lField = operacao.GetDetalhes(table.xTable);
                 }

@@ -186,13 +186,13 @@
                                 <ColumnDefinition Width="20"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="{Binding xField, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBlock>
-                            <CheckBox Grid.Column="1"></CheckBox>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding bxField, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></CheckBox>
                             <TextBlock Text="{Binding xTipo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="2"></TextBlock>
-                            <CheckBox Grid.Column="3"></CheckBox>
+                            <CheckBox IsChecked="{Binding bxTipo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3"></CheckBox>
                             <TextBlock Text="Is not null" Grid.Column="4"></TextBlock>
-                            <CheckBox Grid.Column="5" IsChecked="{Binding IsNotNull, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></CheckBox>
+                            <CheckBox Grid.Column="5" IsChecked="{Binding bisNotNull, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></CheckBox>
                             <TextBlock Text="{Binding xTamanho, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="6"></TextBlock>
-                            <CheckBox Grid.Column="7"></CheckBox>
+                            <CheckBox Grid.Column="7" IsChecked="{Binding bPosicao, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ></CheckBox>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -279,7 +279,7 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
                     <TextBox Style="{DynamicResource TextBox_TABLES}" Text="Selected Tables" Height="40" Margin="0,0,0,5" VerticalAlignment="Bottom"></TextBox>
-                    <ListBox x:Name="lbSelected" Height="150" Grid.Row="2" ItemsSource="{Binding lTableSelected}" >
+                    <ListBox x:Name="lbSelected" Height="150" Grid.Row="2" ItemsSource="{Binding lTableSelected}"  >
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel Orientation="Vertical" Height="140" VerticalAlignment="Bottom"></WrapPanel>
@@ -312,8 +312,7 @@
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <TextBox Style="{DynamicResource TextBox_TABLES}" Text="Database 1 " Height="40" Margin="0,0,0,5" VerticalAlignment="Bottom"></TextBox>
-                        <ListBox Grid.Row="2" ItemsSource="{Binding }">
-                            <ListBoxItem Style="{DynamicResource ListBoxItemCONEXOIES}"></ListBoxItem>
+                        <ListBox Grid.Row="2" ItemsSource="{Binding currentModel.currentTablePrincipal.lField}" ItemContainerStyle="{StaticResource ListBoxItemCONEXOIES}">                            
                         </ListBox>
                     </Grid>
 
@@ -324,7 +323,7 @@
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <TextBox Style="{DynamicResource TextBox_TABLES}" Text="Database 2 " Height="40" Margin="0,0,0,5" VerticalAlignment="Bottom"></TextBox>
-                        <ListBox Grid.Row="2"></ListBox>
+                        <ListBox Grid.Row="2" ItemsSource="{Binding currentModel.currentTableSecundary.lField}" ItemContainerStyle="{StaticResource ListBoxItemCONEXOIES}"/>
                     </Grid>
 
                 </Grid>
