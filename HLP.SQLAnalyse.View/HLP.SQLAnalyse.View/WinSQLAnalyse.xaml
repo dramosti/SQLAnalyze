@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="WinSQLAnalyse" Height="500" Width="1000" WindowState="Maximized" AllowsTransparency="True" WindowStyle="None">
     <Window.Resources>
-        
+
         <Style x:Key="Button_FECHAR" TargetType="{x:Type Button}">
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -102,11 +102,58 @@
             </Setter>
         </Style>
         
+        <Style x:Key="TextBox_TABLES" TargetType="{x:Type TextBox}">            
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="#FFB9B9B9"/>
+            <Setter Property="FontFamily" Value="Segoe Ui light"/>
+            <Setter Property="FontSize" Value="28"></Setter>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid Width="Auto">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="40"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.ColumnSpan="2" BorderThickness="0,0,0,1" BorderBrush="#FFB9B9B9"></Border>
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalAlignment="Center" VerticalScrollBarVisibility="Hidden"/>
+                            <Path Grid.Column="1" Stretch="Fill" Height="22" Width="20" Fill="#FFB9B9B9" Data="F1 M 22,30L 47.75,30L 36.75,19L 48.25,19L 62.25,33L 47.25,48L 36.75,48L 47.75,37L 29,37L 29,59L 22,59L 22,30 Z " RenderTransformOrigin="0.5,0.5" Margin="7.332,16.835,12.667,1.164">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="90"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="Auto" MaxHeight="150"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
@@ -116,27 +163,34 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition Width="10"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
+
+        <Border Grid.ColumnSpan="3" Grid.RowSpan="6" BorderThickness="1" Background="#FF626262" BorderBrush="#FFB9B9B9"/>
         <Grid Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="25"></ColumnDefinition>
-                <ColumnDefinition Width="25"></ColumnDefinition>                
+                <ColumnDefinition Width="25"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" Style="{StaticResource Button_MINIMIZAR}" Click="Button_Click_1" Margin="0,1,1,0"></Button>
-            <Button Grid.Column="2" Style="{StaticResource Button_FECHAR}" Click="Button_Click" Margin="0,1,1,0"></Button>
+            <Button Grid.Column="1" Style="{StaticResource Button_MINIMIZAR}" Margin="0,1,1,0"></Button>
+            <Button Grid.Column="2" Style="{StaticResource Button_FECHAR}" Margin="0,1,1,0"></Button>
         </Grid>
-        <Label Grid.Column="1" Grid.Row="1" Content="Tabels" ></Label>
-        
-        <Grid Grid.Column="1" Grid.Row="2">
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBox Style="{DynamicResource TextBox_TABLES}" Text="Tables" Height="40" VerticalAlignment="Bottom"></TextBox>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="3">
             <ListBox Height="150">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Orientation="Vertical" Height="140" VerticalAlignment="Bottom"></WrapPanel>
                     </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>               
+                </ListBox.ItemsPanel>
             </ListBox>
         </Grid>
-        
+
     </Grid>
 </Window>
