@@ -58,7 +58,7 @@ namespace HLP.SQLAnalyse.Model
         }
 
         
-        private TableModel _currentTableSecundary = new TableModel();;
+        private TableModel _currentTableSecundary = new TableModel();
 
         public TableModel currentTableSecundary
         {

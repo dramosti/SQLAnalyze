@@ -28,7 +28,11 @@ namespace HLP.SQLAnalyse.View
             this.ViewModel = ViewModel;
             this.WinPrincipal = WinPrincipal as Window;
             lbSelected.KeyDown += this.ViewModel.ListBox_KeyDown;
+            lbSelected.SelectionChanged += this.ViewModel.lbSelected_SelectionChanged;
+            
         }
+
+      
 
         public AnalyzeViewModel ViewModel
         {
@@ -45,5 +49,12 @@ namespace HLP.SQLAnalyse.View
                win.Show();
            }));
         }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        
     }
 }

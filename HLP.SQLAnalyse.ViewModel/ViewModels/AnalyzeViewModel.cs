@@ -112,9 +112,19 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
                 {
                     ((TableModel)(sender as ListBox).SelectedItem).isSelect = false;
                     this.lTableSelected.Remove((TableModel)(sender as ListBox).SelectedItem);
-                    
+
                 }
             }
+        }
+
+        public void lbSelected_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.currentModel.currentTablePrincipal = new TableModel();
+            this.currentModel.currentTableSecundary = new TableModel();
+
+            this.currentModel.currentTablePrincipal = (sender as ListBox).SelectedItem as TableModel;
+            
+            this.currentModel.currentTableSecundary = this.currentModel.lTableSecudary.FirstOrDefault(c => c.xTable == this.currentModel.currentTablePrincipal.xTable);
         }
 
     }
