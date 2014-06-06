@@ -23,7 +23,7 @@ namespace HLP.SQLAnalyse.Model
             }
         }
 
-        private ObservableCollection<TableModel> _lTablePrincipal;
+        private ObservableCollection<TableModel> _lTablePrincipal = new ObservableCollection<TableModel>();
         public ObservableCollection<TableModel> lTablePrincipal
         {
             get { return _lTablePrincipal; }
@@ -34,7 +34,7 @@ namespace HLP.SQLAnalyse.Model
             }
         }
 
-        private List<TableModel> _lTableSecudary;
+        private List<TableModel> _lTableSecudary = new ObservableCollection<TableModel>();
         public List<TableModel> lTableSecudary
         {
             get { return _lTableSecudary; }
@@ -52,7 +52,7 @@ namespace HLP.SQLAnalyse.Model
                 TableModel tableSecundary = null;
                 FieldModel fieldSecundary = null;
 
-                foreach (var tablePrincipal in lTablePrincipal)
+                foreach (var tablePrincipal in lTablePrincipal.Where(c => c.isSelect))
                 {
                     //busca a tabela a ser analisada
                     tableSecundary = lTableSecudary.FirstOrDefault(c => c.xTable == tablePrincipal.xTable);

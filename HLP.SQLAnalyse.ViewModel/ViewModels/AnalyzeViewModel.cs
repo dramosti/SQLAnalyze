@@ -18,6 +18,9 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
         public ICommand NextCommand { get; set; }
         public ICommand TpAnalyseCommand { get; set; }
         public ICommand AnalyzeCommand { get; set; }
+        public ICommand SelectAllCommand { get; set; }
+        public ICommand FindTableCommand { get; set; }
+
 
         public string tpAnalyze { get; set; }
 
@@ -28,6 +31,18 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
         }
 
         public AnalyzeCommand command { get; set; }
+
+        private ObservableCollection<TableModel> _lTableSelected = new ObservableCollection<TableModel>();
+        public ObservableCollection<TableModel> lTableSelected
+        {
+            get { return _lTableSelected; }
+            set
+            {
+                _lTableSelected = value;
+                base.NotifyPropertyChanged(propertyName: "lTableSelected");
+            }
+        }
+
 
         private ConnectionConfigModel _currentConexao = new ConnectionConfigModel();
         public ConnectionConfigModel currentConexao
@@ -58,8 +73,12 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
             }
         }
 
-
-      
+        private string _xValueFind = string.Empty;
+        public string xValueFind
+        {
+            get { return _xValueFind; }
+            set { _xValueFind = value.ToUpper(); base.NotifyPropertyChanged("xValueFind"); }
+        }             
 
     }
 }

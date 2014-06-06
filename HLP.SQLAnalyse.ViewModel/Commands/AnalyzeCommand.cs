@@ -34,6 +34,10 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
                    canExecute: i => CanNext());
             this.ViewModel.TpAnalyseCommand = new RelayCommand(execute: i => this.SetTpAnalyse(i),
                    canExecute: i => true);
+            this.ViewModel.SelectAllCommand = new RelayCommand(execute: i => this.SelectAllCheckBox(),
+                 canExecute: i => true);
+            this.ViewModel.FindTableCommand = new RelayCommand(execute: i => this.FindTable(),
+               canExecute: i => CanFindTable());
 
             // Pesquisa servidores SQL
             this.ViewModel.bWorkerPesquisa.DoWork += bWorkerPesquisa_DoWork;
@@ -41,6 +45,42 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
             this.bWorkerTables.DoWork += bWorkerTables_DoWork;
         }
 
+
+        private void FindTable()
+        {
+            try
+            {
+                if (this.ViewModel.xValueFind != "")
+                {
+                    foreach (var table in this.ViewModel.currentModel.lTablePrincipal)
+                    {
+                        table.visibility = Visibility.Collapsed;
+                    }
+                    foreach (var table in this.ViewModel.currentModel.lTablePrincipal.Where(c => c.xTable.Contains(this.ViewModel.xValueFind.ToUpper())))
+                    {
+                        table.visibility = Visibility.Visible;
+                    }
+                }
+                else
+                {
+                    foreach (var table in this.ViewModel.currentModel.lTablePrincipal)
+                    {
+                        table.visibility = Visibility.Visible;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        private bool CanFindTable() 
+        {
+            if (this.ViewModel.currentModel.lTablePrincipal.Count() > 0)
+                return true;
+            else
+                return false;
+        }
 
         private void SetTpAnalyse(object tpAnalyze)
         {
@@ -51,12 +91,10 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
         {
             this.ViewModel.currentModel.ExecuteAnalyse();
         }
-
         private bool CanExecAnalyze()
         {
             return this.ViewModel.currentModel.lTablePrincipal.Where(c => c.isSelect).Count() > 0;
         }
-
 
         private void Next(object win)
         {
@@ -74,6 +112,27 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
         private bool CanNext()
         {
             return this.ViewModel.currentModel.conexoes.Count == 2 && this.ViewModel.tpAnalyze != null;
+        }
+
+        /// <summary>
+        /// Metodo para marcar e desmarcar tabelas para análise.
+        /// </summary>
+        public void SelectAllCheckBox()
+        {
+            if (this.ViewModel.currentModel.lTablePrincipal.Where(c => c.isSelect).Count() != this.ViewModel.currentModel.lTablePrincipal.Count())
+            {
+                foreach (var item in this.ViewModel.currentModel.lTablePrincipal.Where(c => !c.isSelect))
+                {
+                    item.isSelect = true;
+                }
+            }
+            else
+            {
+                foreach (var item in this.ViewModel.currentModel.lTablePrincipal.Where(c => !c.isSelect))
+                {
+                    item.isSelect = false;
+                }
+            }
         }
 
 
@@ -108,7 +167,6 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
                 throw ex;
             }
         }
-
         private void bWorkerPesquisa_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             try

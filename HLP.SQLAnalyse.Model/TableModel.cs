@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace HLP.SQLAnalyse.Model
 {
@@ -33,13 +34,23 @@ namespace HLP.SQLAnalyse.Model
             }
         }
 
+        private Visibility _visibility = Visibility.Visible;
+        public Visibility visibility
+        {
+            get { return _visibility; }
+            set
+            {
+                _visibility = value;
+                base.NotifyPropertyChanged(propertyName: "visibility");
+            }
+        }
+        
 
-
-
+        
         private List<FieldModel> _lField = new List<FieldModel>();
         public List<FieldModel> lField
         {
-            get { return _lField; }
+            get { return _lField;  }
             set
             {
                 _lField = value;
