@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace HLP.SQLAnalyse.ViewModel.ViewModels
@@ -20,6 +21,7 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
         public ICommand AnalyzeCommand { get; set; }
         public ICommand SelectAllCommand { get; set; }
         public ICommand FindTableCommand { get; set; }
+        public ICommand CheckBoxSelectCommand { get; set; }
 
 
         public string tpAnalyze { get; set; }
@@ -33,6 +35,9 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
         public AnalyzeCommand command { get; set; }
 
         private ObservableCollection<TableModel> _lTableSelected = new ObservableCollection<TableModel>();
+        /// <summary>
+        /// Lista de tabelas selecionadas para pesquisa
+        /// </summary>
         public ObservableCollection<TableModel> lTableSelected
         {
             get { return _lTableSelected; }
@@ -42,6 +47,22 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
                 base.NotifyPropertyChanged(propertyName: "lTableSelected");
             }
         }
+
+
+
+        private bool _bisChecked;
+
+        public bool bisChecked
+        {
+            get { return _bisChecked; }
+            set
+            {
+                _bisChecked = value;
+                base.NotifyPropertyChanged(propertyName: "bisChecked");
+            }
+        }
+
+
 
 
         private ConnectionConfigModel _currentConexao = new ConnectionConfigModel();
@@ -78,7 +99,16 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
         {
             get { return _xValueFind; }
             set { _xValueFind = value.ToUpper(); base.NotifyPropertyChanged("xValueFind"); }
-        }             
+        }
+
+        public void ListBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete)
+            {
+                if (this.lTableSelected.Count() > 0)
+                    this.lTableSelected.Remove((TableModel)(sender as ListBox).SelectedItem);
+            }
+        }
 
     }
 }

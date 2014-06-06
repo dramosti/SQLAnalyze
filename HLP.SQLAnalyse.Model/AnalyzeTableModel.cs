@@ -34,14 +34,28 @@ namespace HLP.SQLAnalyse.Model
             }
         }
 
-        private List<TableModel> _lTableSecudary = new ObservableCollection<TableModel>();
-        public List<TableModel> lTableSecudary
+        private ObservableCollection<TableModel> _lTableSecudary = new ObservableCollection<TableModel>();
+        public ObservableCollection<TableModel> lTableSecudary
         {
             get { return _lTableSecudary; }
             set
             {
                 _lTableSecudary = value;
                 base.NotifyPropertyChanged(propertyName: "lTableSecudary");
+            }
+        }
+
+        private ObservableCollection<TableModel> _lTableToSelect = new ObservableCollection<TableModel>();
+        /// <summary>
+        /// Lista de tabelas para ser manipulada e ficar a disposição de selecionar.
+        /// </summary>
+        public ObservableCollection<TableModel> lTableToSelect
+        {
+            get { return _lTableToSelect; }
+            set
+            {
+                _lTableToSelect = value;
+                base.NotifyPropertyChanged(propertyName: "lTableToSelect");
             }
         }
 

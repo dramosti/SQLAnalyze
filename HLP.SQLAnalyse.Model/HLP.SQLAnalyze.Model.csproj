@@ -33,9 +33,11 @@
     <Reference Include="HLP.Base">
       <HintPath>G:\CSharp\Desenvolvimento\Projetos\Magnificus\dlls\bin\HLP.Base.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />

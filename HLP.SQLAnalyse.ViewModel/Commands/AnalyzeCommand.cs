@@ -38,11 +38,13 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
                  canExecute: i => true);
             this.ViewModel.FindTableCommand = new RelayCommand(execute: i => this.FindTable(),
                canExecute: i => CanFindTable());
+            this.ViewModel.CheckBoxSelectCommand = new RelayCommand(execute: i => this.SetTablesToListSelected(),
+               canExecute: i => true);
 
             // Pesquisa servidores SQL
             this.ViewModel.bWorkerPesquisa.DoWork += bWorkerPesquisa_DoWork;
             this.ViewModel.bWorkerPesquisa.RunWorkerAsync();
-            this.bWorkerTables.DoWork += bWorkerTables_DoWork;
+            this.bWorkerTables.DoWork += bWorkerTables_DoWork;           
         }
 
 
@@ -50,23 +52,10 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
         {
             try
             {
-                if (this.ViewModel.xValueFind != "")
+                this.ViewModel.currentModel.lTableToSelect = new System.Collections.ObjectModel.ObservableCollection<TableModel>();
+                foreach (var table in this.ViewModel.currentModel.lTablePrincipal.Where(c => c.xTable.Contains(this.ViewModel.xValueFind.ToUpper())))
                 {
-                    foreach (var table in this.ViewModel.currentModel.lTablePrincipal)
-                    {
-                        table.visibility = Visibility.Collapsed;
-                    }
-                    foreach (var table in this.ViewModel.currentModel.lTablePrincipal.Where(c => c.xTable.Contains(this.ViewModel.xValueFind.ToUpper())))
-                    {
-                        table.visibility = Visibility.Visible;
-                    }
-                }
-                else
-                {
-                    foreach (var table in this.ViewModel.currentModel.lTablePrincipal)
-                    {
-                        table.visibility = Visibility.Visible;
-                    }
+                    this.ViewModel.currentModel.lTableToSelect.Add(table);
                 }
             }
             catch (Exception ex)
@@ -74,7 +63,7 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
                 throw ex;
             }
         }
-        private bool CanFindTable() 
+        private bool CanFindTable()
         {
             if (this.ViewModel.currentModel.lTablePrincipal.Count() > 0)
                 return true;
@@ -119,21 +108,22 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
         /// </summary>
         public void SelectAllCheckBox()
         {
-            if (this.ViewModel.currentModel.lTablePrincipal.Where(c => c.isSelect).Count() != this.ViewModel.currentModel.lTablePrincipal.Count())
+            foreach (var item in this.ViewModel.currentModel.lTableToSelect)
             {
-                foreach (var item in this.ViewModel.currentModel.lTablePrincipal.Where(c => !c.isSelect))
-                {
-                    item.isSelect = true;
-                }
+                item.isSelect = this.ViewModel.bisChecked;
             }
-            else
+            SetTablesToListSelected();
+        }
+
+        private void SetTablesToListSelected()
+        {
+            this.ViewModel.lTableSelected = new System.Collections.ObjectModel.ObservableCollection<TableModel>();
+            foreach (var table in this.ViewModel.currentModel.lTablePrincipal.Where(c => c.isSelect))
             {
-                foreach (var item in this.ViewModel.currentModel.lTablePrincipal.Where(c => !c.isSelect))
-                {
-                    item.isSelect = false;
-                }
+                this.ViewModel.lTableSelected.Add(table);
             }
         }
+        
 
 
         void bWorkerTables_DoWork(object sender, DoWorkEventArgs e)
@@ -146,8 +136,9 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
                 {
                     table.lField = operacao.GetDetalhes(table.xTable);
                 }
+                this.ViewModel.currentModel.lTableToSelect = this.ViewModel.currentModel.lTablePrincipal;
                 operacao = new OperacoesSqlRepository(this.ViewModel.currentModel.conexoes.LastOrDefault().ConnectionStringCompleted);
-                this.ViewModel.currentModel.lTableSecudary = operacao.GetTabelas();
+                this.ViewModel.currentModel.lTableSecudary = new System.Collections.ObjectModel.ObservableCollection<TableModel>(operacao.GetTabelas());
                 foreach (var table in this.ViewModel.currentModel.lTablePrincipal)
                 {
                     table.lField = operacao.GetDetalhes(table.xTable);

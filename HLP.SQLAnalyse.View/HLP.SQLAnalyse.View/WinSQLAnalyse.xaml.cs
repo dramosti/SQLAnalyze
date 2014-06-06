@@ -23,10 +23,11 @@ namespace HLP.SQLAnalyse.View
         Window WinPrincipal;
         public WinSQLAnalyse(object WinPrincipal, AnalyzeViewModel ViewModel)
         {
-            
+
             InitializeComponent();
             this.ViewModel = ViewModel;
             this.WinPrincipal = WinPrincipal as Window;
+            lbSelected.KeyDown += this.ViewModel.ListBox_KeyDown;
         }
 
         public AnalyzeViewModel ViewModel

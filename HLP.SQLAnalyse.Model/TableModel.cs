@@ -18,7 +18,7 @@ namespace HLP.SQLAnalyse.Model
             get { return _xTable; }
             set
             {
-                _xTable = value;
+                _xTable = value.ToUpper();
                 base.NotifyPropertyChanged(propertyName: "xTable");
             }
         }
@@ -34,19 +34,6 @@ namespace HLP.SQLAnalyse.Model
             }
         }
 
-        private Visibility _visibility = Visibility.Visible;
-        public Visibility visibility
-        {
-            get { return _visibility; }
-            set
-            {
-                _visibility = value;
-                base.NotifyPropertyChanged(propertyName: "visibility");
-            }
-        }
-        
-
-        
         private List<FieldModel> _lField = new List<FieldModel>();
         public List<FieldModel> lField
         {
