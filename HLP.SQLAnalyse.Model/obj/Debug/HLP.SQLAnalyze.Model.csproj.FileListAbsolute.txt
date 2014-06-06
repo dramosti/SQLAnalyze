@@ -20,7 +20,6 @@ D:\Projetos novos\SQLAnalyse\HLP.SQLAnalyse.Model\obj\Debug\HLP.SQLAnalyse.Model
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.Model\bin\Debug\HLP.SQLAnalyse.Model.dll
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.Model\bin\Debug\HLP.SQLAnalyse.Model.pdb
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.Model\bin\Debug\HLP.Base.dll
-D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.Model\bin\Debug\HLP.Comum.Model.dll
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.Model\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.Model\bin\Debug\Ninject.dll
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.Model\bin\Debug\HLP.Report.View.WPF.dll
@@ -31,7 +30,6 @@ D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.Model\bin\Debug\Microsoft.Practices.Unit
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.Model\bin\Debug\Common.Logging.dll
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.Model\bin\Debug\Microsoft.Practices.Unity.Interception.dll
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.Model\bin\Debug\HLP.Base.pdb
-D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.Model\bin\Debug\HLP.Comum.Model.pdb
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.Model\bin\Debug\HLP.Report.View.WPF.pdb
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.Model\obj\Debug\HLP.SQLAnalyze.Model.csprojResolveAssemblyReference.cache
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.Model\obj\Debug\HLP.SQLAnalyse.Model.dll

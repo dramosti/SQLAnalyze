@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HLP.Base">
+      <HintPath>G:\CSharp\Desenvolvimento\Projetos\Magnificus\dlls\bin\HLP.Base.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -53,6 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\NotBoolConverter.cs" />
     <Compile Include="WinSQLAnalyse.xaml.cs">
       <DependentUpon>WinSQLAnalyse.xaml</DependentUpon>
     </Compile>
@@ -99,6 +103,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\HLP.SQLAnalyse.Model\HLP.SQLAnalyze.Model.csproj">
+      <Project>{55026fd7-9d8b-4daa-a026-6ed3abc31d02}</Project>
+      <Name>HLP.SQLAnalyze.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\HLP.SQLAnalyse.ViewModel\HLP.SQLAnalyze.ViewModel.csproj">
+      <Project>{3eab1c65-339e-428b-b878-12a22fb14a19}</Project>
+      <Name>HLP.SQLAnalyze.ViewModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

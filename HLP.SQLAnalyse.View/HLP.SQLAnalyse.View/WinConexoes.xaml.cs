@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HLP.SQLAnalyse.ViewModel.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,21 @@ namespace HLP.SQLAnalyse.View
         public MainWindow()
         {
             InitializeComponent();
+            this.ViewModel = new AnalyzeViewModel();
+            txtPassword.LostFocus+=txtPassword_LostFocus;
         }
+
+        public void txtPassword_LostFocus(object sender, RoutedEventArgs e)
+        {
+           this.ViewModel.command.CarregaBases();
+        }
+
+        public AnalyzeViewModel ViewModel 
+        {
+            get { return this.DataContext as AnalyzeViewModel; }
+            set { this.DataContext = value; }
+        }
+
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

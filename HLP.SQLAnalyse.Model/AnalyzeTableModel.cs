@@ -1,5 +1,4 @@
 ﻿using HLP.Base.ClassesBases;
-using HLP.Comum.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,7 +12,7 @@ namespace HLP.SQLAnalyse.Model
     {
         public AnalyzeTableModel() { }
 
-        private ObservableCollection<ConnectionConfigModel> _conexoes;
+        private ObservableCollection<ConnectionConfigModel> _conexoes = new ObservableCollection<ConnectionConfigModel>();
         public ObservableCollection<ConnectionConfigModel> conexoes
         {
             get { return _conexoes; }
@@ -23,8 +22,6 @@ namespace HLP.SQLAnalyse.Model
                 base.NotifyPropertyChanged(propertyName: "conexoes");
             }
         }
-        
-        
 
         private ObservableCollection<TableModel> _lTablePrincipal;
         public ObservableCollection<TableModel> lTablePrincipal

@@ -24,18 +24,69 @@ namespace HLP.SQLAnalyse.Model
             }
         }
 
-        private string _xTipo;
         public string xTipo
         {
-            get { return _xTipo; }
-            set
+            get
             {
-                _xTipo = value;
-                base.NotifyPropertyChanged(propertyName: "xTipo");
+                switch (this.xTypeName.ToUpper())
+                {
+                    case "INT":
+                    case "INT IDENTITY":
+                        {
+                            return "int";
+                        }
+                    case "DECIMAL": return string.Format("DECIMAL ({0},{1})", this.xPrecisao, this.xCasasDecimais);
+                    case "VARCHAR": return string.Format("VARCHAR ({0})", this.xTamanho);
+                    case "DATE": return "DATE";
+                    case "BIT": return "BIT";
+                    case "TINYINT": return "TINYINT";
+                    case "TIME": return "TIME";
+                    default: return "";
+                }
             }
         }
 
         private bool _isNotNul = false;
+
+
+        private string _xTypeName;
+
+        public string xTypeName
+        {
+            get { return _xTypeName; }
+            set { _xTypeName = value; }
+        }
+
+
+        private string _xTamanho;
+        public string xTamanho
+        {
+            get { return _xTamanho; }
+            set { _xTamanho = value; }
+        }
+
+        private string _xCasasDecimais;
+        public string xCasasDecimais
+        {
+            get { return _xCasasDecimais; }
+            set { _xCasasDecimais = value; }
+        }
+
+        private string _xPrecisao;
+
+        public string xPrecisao
+        {
+            get { return _xPrecisao; }
+            set { _xPrecisao = value; }
+        }
+
+
+
+
+
+
+
+
         public bool isNotNul
         {
             get { return _isNotNul; }
@@ -102,7 +153,7 @@ namespace HLP.SQLAnalyse.Model
                 base.NotifyPropertyChanged(propertyName: "bPosicao");
             }
         }
-        
+
         #endregion
 
         public void SetTrueValidacao()
@@ -125,3 +176,4 @@ namespace HLP.SQLAnalyse.Model
         }
     }
 }
+
