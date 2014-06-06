@@ -93,6 +93,12 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
                     table.lField = operacao.GetDetalhes(table.xTable);
                 }
                 ((Window)e.Argument).Visibility = Visibility.Hidden;
+
+                Base.Static.Sistema.ExecuteMethodByReflection
+                    (xNamespace: "HLP.SQLAnalyse.View",
+                    xType: "WinSQLAnalyse",
+                    xMethod: "ShowAnalyse",
+                    parameters: new object[] { ((object)e.Argument) });
             }
             catch (Exception ex)
             {

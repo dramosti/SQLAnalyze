@@ -130,9 +130,9 @@ namespace HLP.SQLAnalyse.Model
                 if (columnName == "xServerName")
                     if (this.xServerName == "")
                         return sAviso;
-                if (columnName == "xBaseDados")
-                    if (this.xBaseDados == "")
-                        return sAviso;
+                //if (columnName == "xBaseDados")
+                //    if (this.xBaseDados == "")
+                //        return sAviso;
                 return base[columnName];
             }
         }

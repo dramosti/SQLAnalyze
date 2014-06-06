@@ -19,9 +19,18 @@ namespace HLP.SQLAnalyse.View
     /// </summary>
     public partial class WinSQLAnalyse : Window
     {
-        public WinSQLAnalyse()
+        Window WinPrincipal;
+        public WinSQLAnalyse(object WinPrincipal)
         {
             InitializeComponent();
+            this.WinPrincipal = WinPrincipal as Window;
+        }
+
+        public static void ShowAnalyse(object WinPrincipal)
+        {
+            WinSQLAnalyse win = new WinSQLAnalyse(WinPrincipal);
+            win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            win.Show();
         }
     }
 }
