@@ -434,7 +434,7 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
                     <DockPanel LastChildFill="True">
-                        <Button DockPanel.Dock="Left" Command="{Binding ExecuteAnalyze}" Width="130" Height="25" Margin="0,0,30,0" Content="Analyze" Style="{StaticResource Button_ANALYZE}"></Button>
+                        <Button DockPanel.Dock="Left" Command="{Binding ExecuteAnalyzeCommand}" Width="130" Height="25" Margin="0,0,30,0" Content="Analyze" Style="{StaticResource Button_ANALYZE}"></Button>
                         <TextBox DockPanel.Dock="Left" Style="{DynamicResource TextBox_TABLES}" Text="Selected Tables" Height="40" Margin="0,0,0,5" VerticalAlignment="Bottom"></TextBox>
                     </DockPanel>
                     <ListBox x:Name="lbSelected" Height="150" Grid.Row="2" ItemsSource="{Binding lTableSelected}"  >

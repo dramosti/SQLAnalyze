@@ -53,15 +53,10 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
             this.ViewModel.bWorkerPesquisa.RunWorkerAsync();
             this.bWorkerTables.DoWork += bWorkerTables_DoWork;
 
-            this.bWorkerAnalyseTable.DoWork += bWorkerAnalyseTable_DoWork;
+            this.bWorkerExecuteAnalyze.DoWork += bWorkerExecuteAnalyze_DoWork;
         }
 
-
-        private void ExecuteAnalyze()
-        {
-            this.bWorkerTables.RunWorkerAsync();
-        }
-        void bWorkerAnalyseTable_DoWork(object sender, DoWorkEventArgs e)
+        void bWorkerExecuteAnalyze_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
@@ -82,6 +77,12 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
             {
                 throw ex;
             }
+        }
+
+
+        private void ExecuteAnalyze()
+        {
+            this.bWorkerExecuteAnalyze.RunWorkerAsync();
         }
         private bool CanExecuteAnalyze()
         {

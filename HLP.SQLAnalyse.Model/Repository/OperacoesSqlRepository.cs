@@ -149,6 +149,7 @@ namespace HLP.SQLAnalyse.Model.Repository
                     SqlDataAdapter da = new SqlDataAdapter(command);
                     da.Fill(dt);
                     FieldModel objField;
+                    int iPosition = 0;
                     foreach (DataRow row in dt.Rows)
                     {
                         objField = new FieldModel
@@ -158,6 +159,7 @@ namespace HLP.SQLAnalyse.Model.Repository
                             xTamanho = row[7].ToString(),
                             xCasasDecimais = row[8].ToString(),
                             xPrecisao = row[6].ToString(),
+                            posicao = iPosition = iPosition++,
                             isNotNul = (row[10].ToString() == "0" ? true : false)
                         };
                         objField.SetxTipo();
