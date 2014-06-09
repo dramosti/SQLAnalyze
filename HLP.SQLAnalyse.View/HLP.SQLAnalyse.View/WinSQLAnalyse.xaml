@@ -408,14 +408,14 @@
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Border Grid.ColumnSpan="10" BorderThickness="0,0,0,1" BorderBrush="#FF5B7184"></Border>
-                            <TextBlock Text="{Binding xField, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBlock>
-                            <CheckBox Grid.Column="1" IsChecked="{Binding bxField, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource Check_LISTBOX}"></CheckBox>
-                            <TextBlock Text="{Binding xTipo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="2"></TextBlock>
-                            <CheckBox IsChecked="{Binding bxTipo}" Grid.Column="3" Style="{StaticResource Check_LISTBOX}"></CheckBox>
-                            <TextBlock Text="Is not null" Grid.Column="4"></TextBlock>
-                            <CheckBox Grid.Column="5" IsChecked="{Binding bisNotNull, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource Check_LISTBOX}"></CheckBox>
-                            <TextBlock Text="{Binding posicao, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="6"></TextBlock>
-                            <CheckBox Grid.Column="7" IsChecked="{Binding bPosicao, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource Check_LISTBOX}"></CheckBox>
+                            <TextBlock Text="{Binding xField, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontFamily="Segoe Ui Light" Foreground="#FF626262"></TextBlock>
+                            <CheckBox Grid.Column="1" IsEnabled="False" IsChecked="{Binding bxField, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource Check_LISTBOX}"></CheckBox>
+                            <TextBlock Text="{Binding xTipo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="2" FontFamily="Segoe Ui Light" Foreground="#FF626262" ></TextBlock>
+                            <CheckBox IsEnabled="False" IsChecked="{Binding bxTipo}" Grid.Column="3" Style="{StaticResource Check_LISTBOX}"></CheckBox>
+                            <TextBlock Text="Is not null" Grid.Column="4" FontFamily="Segoe Ui Light" Foreground="#FF626262"></TextBlock>
+                            <CheckBox IsEnabled="False" Grid.Column="5" IsChecked="{Binding bisNotNull, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource Check_LISTBOX}"></CheckBox>
+                            <TextBlock Text="{Binding posicao, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="6" FontFamily="Segoe Ui Light" Foreground="#FF626262"></TextBlock>
+                            <CheckBox IsEnabled="False" Grid.Column="7" IsChecked="{Binding bPosicao, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource Check_LISTBOX}"></CheckBox>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -477,7 +477,7 @@
                     IsChecked="{Binding bisChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                     Command="{Binding SelectAllCommand}" Style="{StaticResource Check_ANALYZE}"
                     Content="Selecionar Todos" Height="20" Margin="0,0,0,3" Grid.Row="1"></CheckBox>
-                <ListBox Grid.Row="3" ItemsSource="{Binding currentModel.lTableToSelect}">
+                <ListBox x:Name="lbTables" Grid.Row="3" ItemsSource="{Binding currentModel.lTableToSelect}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <DockPanel LastChildFill="True">
@@ -491,7 +491,7 @@
                 </ListBox>
             </Grid>
 
-            <GridSplitter ResizeDirection="Columns" Grid.Column="1" Height="482" VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="#FFB9B9B9" Width="2"></GridSplitter>
+            <GridSplitter ResizeDirection="Columns" Grid.Column="1" Height="300" VerticalAlignment="Center" HorizontalAlignment="Left" Background="#FFB9B9B9" Width="2"></GridSplitter>
             
             <Grid Grid.Column="3" Margin="50,0,0,0" >
                 <Grid.RowDefinitions>
