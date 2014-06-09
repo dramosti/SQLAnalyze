@@ -18,7 +18,7 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
         public ICommand AddCommand { get; set; }
         public ICommand NextCommand { get; set; }
         public ICommand TpAnalyseCommand { get; set; }
-        public ICommand AnalyzeCommand { get; set; }
+        public ICommand ExecuteAnalyzeCommand { get; set; }
         public ICommand SelectAllCommand { get; set; }
         public ICommand FindTableCommand { get; set; }
         public ICommand CheckBoxSelectCommand { get; set; }
@@ -123,8 +123,9 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
             this.currentModel.currentTableSecundary = new TableModel();
 
             this.currentModel.currentTablePrincipal = (sender as ListBox).SelectedItem as TableModel;
-            
-            this.currentModel.currentTableSecundary = this.currentModel.lTableSecudary.FirstOrDefault(c => c.xTable == this.currentModel.currentTablePrincipal.xTable);
+
+            if (this.currentModel.currentTablePrincipal != null)
+                this.currentModel.currentTableSecundary = this.currentModel.lTableSecudary.FirstOrDefault(c => c.xTable == this.currentModel.currentTablePrincipal.xTable);
         }
 
     }

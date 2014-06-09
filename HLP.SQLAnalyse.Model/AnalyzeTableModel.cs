@@ -94,7 +94,7 @@ namespace HLP.SQLAnalyse.Model
                 TableModel tableSecundary = null;
                 FieldModel fieldSecundary = null;
 
-                foreach (var tablePrincipal in lTablePrincipal.Where(c => c.isSelect))
+                foreach (var tablePrincipal in lTablePrincipal)
                 {
                     //busca a tabela a ser analisada
                     tableSecundary = lTableSecudary.FirstOrDefault(c => c.xTable == tablePrincipal.xTable);

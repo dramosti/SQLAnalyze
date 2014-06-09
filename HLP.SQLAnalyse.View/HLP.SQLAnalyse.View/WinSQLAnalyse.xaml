@@ -289,7 +289,7 @@
                             <TextBlock Text="{Binding xField, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBlock>
                             <CheckBox Grid.Column="1" IsChecked="{Binding bxField, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></CheckBox>
                             <TextBlock Text="{Binding xTipo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="2"></TextBlock>
-                            <CheckBox IsChecked="{Binding bxTipo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3"></CheckBox>
+                            <CheckBox IsChecked="{Binding bxTipo}" Grid.Column="3"></CheckBox>
                             <TextBlock Text="Is not null" Grid.Column="4"></TextBlock>
                             <CheckBox Grid.Column="5" IsChecked="{Binding bisNotNull, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></CheckBox>
                             <TextBlock Text="{Binding xTamanho, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="6"></TextBlock>

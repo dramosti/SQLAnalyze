@@ -18,6 +18,7 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
     {
         public AnalyzeViewModel ViewModel { get; set; }
         public BackgroundWorker bWorkerTables;
+        public BackgroundWorker bWorkerExecuteAnalyze;
         public BackgroundWorker bWorkerAnalyseTable;
         OperacoesSqlRepository operacao;
 
@@ -25,6 +26,7 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
         {
             this.ViewModel = ViewModel;
             bWorkerTables = new BackgroundWorker();
+            bWorkerExecuteAnalyze = new BackgroundWorker();
 
             this.ViewModel.servers.Add("SEARCHING SERVERS SQL . . .");
             this.ViewModel.currentConexao.xServerName = "SEARCHING SERVERS SQL . . .";
@@ -43,14 +45,48 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
                canExecute: i => CanFindTable());
             this.ViewModel.CheckBoxSelectCommand = new RelayCommand(execute: i => this.SetTablesToListSelected(),
                canExecute: i => true);
+            this.ViewModel.ExecuteAnalyzeCommand = new RelayCommand(execute: i => this.ExecuteAnalyze(),
+               canExecute: i => CanExecuteAnalyze());
 
             // Pesquisa servidores SQL
             this.ViewModel.bWorkerPesquisa.DoWork += bWorkerPesquisa_DoWork;
             this.ViewModel.bWorkerPesquisa.RunWorkerAsync();
             this.bWorkerTables.DoWork += bWorkerTables_DoWork;
 
+            this.bWorkerAnalyseTable.DoWork += bWorkerAnalyseTable_DoWork;
         }
 
+
+        private void ExecuteAnalyze()
+        {
+            this.bWorkerTables.RunWorkerAsync();
+        }
+        void bWorkerAnalyseTable_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                TableModel TableSecundary = null;
+                foreach (var TablePrincipal in this.ViewModel.lTableSelected)
+                {
+                    operacao = new OperacoesSqlRepository(this.ViewModel.currentModel.conexoes.FirstOrDefault().ConnectionStringCompleted);
+                    TablePrincipal.lField = operacao.GetDetalhes(TablePrincipal.xTable);
+                    TableSecundary = this.ViewModel.currentModel.lTableSecudary.FirstOrDefault(c => c.xTable == TablePrincipal.xTable);
+                    if (TableSecundary != null)
+                    {
+                        operacao = new OperacoesSqlRepository(this.ViewModel.currentModel.conexoes.LastOrDefault().ConnectionStringCompleted);
+                        TableSecundary.lField = operacao.GetDetalhes(TableSecundary.xTable);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        private bool CanExecuteAnalyze()
+        {
+            return this.ViewModel.lTableSelected.Count() > 0;
+        }
 
         private void FindTable()
         {
@@ -74,7 +110,6 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
             else
                 return false;
         }
-
         private void SetTpAnalyse(object tpAnalyze)
         {
             this.ViewModel.tpAnalyze = tpAnalyze.ToString();
@@ -118,7 +153,6 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
             }
             SetTablesToListSelected();
         }
-
         private void SetTablesToListSelected()
         {
             this.ViewModel.lTableSelected = new System.Collections.ObjectModel.ObservableCollection<TableModel>();
@@ -128,28 +162,28 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
             }
         }
 
-
-
         void bWorkerTables_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
                 operacao = new OperacoesSqlRepository(this.ViewModel.currentModel.conexoes.FirstOrDefault().ConnectionStringCompleted);
-                this.ViewModel.currentModel.lTablePrincipal = new System.Collections.ObjectModel.ObservableCollection<Model.TableModel>(operacao.GetTabelas());
-                foreach (var table in this.ViewModel.currentModel.lTablePrincipal)
-                {
-                    table.lField = operacao.GetDetalhes(table.xTable);
-                }
-                this.ViewModel.currentModel.lTableToSelect = this.ViewModel.currentModel.lTablePrincipal;
+                this.ViewModel.currentModel.lTableToSelect = this.ViewModel.currentModel.lTablePrincipal = new System.Collections.ObjectModel.ObservableCollection<Model.TableModel>(operacao.GetTabelas());
+                //foreach (var table in this.ViewModel.currentModel.lTablePrincipal)
+                //{
+                //    table.lField = operacao.GetDetalhes(table.xTable);
+                //}
+
                 operacao = new OperacoesSqlRepository(this.ViewModel.currentModel.conexoes.LastOrDefault().ConnectionStringCompleted);
                 this.ViewModel.currentModel.lTableSecudary = new System.Collections.ObjectModel.ObservableCollection<TableModel>(operacao.GetTabelas());
-                foreach (var table in this.ViewModel.currentModel.lTableSecudary)
-                {
-                    table.lField = operacao.GetDetalhes(table.xTable);
-                }
+                //foreach (var table in this.ViewModel.currentModel.lTableSecudary)
+                //{
+                //    table.lField = operacao.GetDetalhes(table.xTable);
+                //}
                 Application.Current.Dispatcher.BeginInvoke(
                   DispatcherPriority.Background,
                     new Action(() => ((Window)e.Argument).Visibility = Visibility.Hidden));
+
+                this.ViewModel.currentModel.ExecuteAnalyse();
 
                 Static.ExecuteMethodByReflection
                     (xNamespace: "HLP.SQLAnalyse.View.exe",
@@ -186,8 +220,6 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
                 throw ex;
             }
         }
-
-
 
 
         public void TestConnection()
@@ -243,8 +275,6 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
             else
                 return false;
         }
-
-
         public void CarregaBases()
         {
             try
