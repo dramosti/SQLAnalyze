@@ -204,7 +204,7 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Foreground" Value="#FFB9B9B9"/>
             <Setter Property="FontFamily" Value="Segoe Ui light"/>
-            <Setter Property="FontSize" Value="28"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
             <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -221,7 +221,7 @@
                             </Grid.ColumnDefinitions>
                             <Border Grid.ColumnSpan="2" BorderThickness="0,0,0,1" BorderBrush="#FFB9B9B9"></Border>
                             <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalAlignment="Center" VerticalScrollBarVisibility="Hidden"/>
-                            <Path Grid.Column="1" Stretch="Fill" Height="22" Width="20" Fill="#FFB9B9B9" Data="F1 M 22,30L 47.75,30L 36.75,19L 48.25,19L 62.25,33L 47.25,48L 36.75,48L 47.75,37L 29,37L 29,59L 22,59L 22,30 Z " RenderTransformOrigin="0.5,0.5" Margin="7.332,16.835,12.667,1.164">
+                            <Path Grid.Column="1" Stretch="Fill" Height="18" Width="18" Fill="#FFB9B9B9" Data="F1 M 22,30L 47.75,30L 36.75,19L 48.25,19L 62.25,33L 47.25,48L 36.75,48L 47.75,37L 29,37L 29,59L 22,59L 22,30 Z " RenderTransformOrigin="0.5,0.5" Margin="4.163,5.496,18.836,1.503">
                                 <Path.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform/>
@@ -275,25 +275,98 @@
 
         <Style x:Key="Button_ANALYZE" TargetType="{x:Type Button}">
             <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Padding" Value="1"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="Storyboard1">
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border">
+                                    <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FF7E7C7C"/>
+                                </ColorAnimationUsingKeyFrames>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" Storyboard.TargetName="border">
+                                    <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FF7E7C7C"/>
+                                </ColorAnimationUsingKeyFrames>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="path">
+                                    <EasingColorKeyFrame KeyTime="0:0:0.3" Value="White"/>
+                                </ColorAnimationUsingKeyFrames>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="contentPresenter">
+                                    <EasingColorKeyFrame KeyTime="0:0:0.3" Value="White"></EasingColorKeyFrame>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Key="Storyboard2">
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#FF7E7C7C"/>
+                                    <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FF626262"/>
+                                </ColorAnimationUsingKeyFrames>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" Storyboard.TargetName="border">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#FF7E7C7C"/>
+                                    <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FF626262"/>
+                                </ColorAnimationUsingKeyFrames>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="contentPresenter">
+                                    <EasingColorKeyFrame KeyTime="0" Value="White"></EasingColorKeyFrame>
+                                    <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FFB9B9B9"></EasingColorKeyFrame>
+                                </ColorAnimationUsingKeyFrames>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="path">
+                                    <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                                    <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FFB9B9B9"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </ControlTemplate.Resources>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="40"></ColumnDefinition>
+                                <ColumnDefinition Width="22"></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Border BorderThickness="1" x:Name="border" Grid.ColumnSpan="3" BorderBrush="#FF626262" Background="#FF626262"></Border>
-                            <Path x:Name="path" Height="25" Width="20" Stretch="Fill" Fill="#FFB9B9B9" Data="F1 M 38,20.5833C 42.9908,20.5833 47.4912,22.6825 50.6667,26.046L 50.6667,17.4167L 55.4166,22.1667L 55.4167,34.8333L 42.75,34.8333L 38,30.0833L 46.8512,30.0833C 44.6768,27.6539 41.517,26.125 38,26.125C 31.9785,26.125 27.0037,30.6068 26.2296,36.4167L 20.6543,36.4167C 21.4543,27.5397 28.9148,20.5833 38,20.5833 Z M 38,49.875C 44.0215,49.875 48.9963,45.3932 49.7703,39.5833L 55.3457,39.5833C 54.5457,48.4603 47.0852,55.4167 38,55.4167C 33.0092,55.4167 28.5088,53.3175 25.3333,49.954L 25.3333,58.5833L 20.5833,53.8333L 20.5833,41.1667L 33.25,41.1667L 38,45.9167L 29.1487,45.9167C 31.3231,48.3461 34.483,49.875 38,49.875 Z "/>
-                            <ContentPresenter x:Name="contentPresenter" Margin="0,0,0,0" TextElement.FontSize="18" Grid.Column="1" TextElement.FontFamily="Segoe Ui Lihgt" TextElement.Foreground="#FFB9B9B9"></ContentPresenter>
+                            <Path x:Name="path" Height="22" HorizontalAlignment="Right" Width="18" Stretch="Fill" Fill="#FFB9B9B9" Data="F1 M 38,20.5833C 42.9908,20.5833 47.4912,22.6825 50.6667,26.046L 50.6667,17.4167L 55.4166,22.1667L 55.4167,34.8333L 42.75,34.8333L 38,30.0833L 46.8512,30.0833C 44.6768,27.6539 41.517,26.125 38,26.125C 31.9785,26.125 27.0037,30.6068 26.2296,36.4167L 20.6543,36.4167C 21.4543,27.5397 28.9148,20.5833 38,20.5833 Z M 38,49.875C 44.0215,49.875 48.9963,45.3932 49.7703,39.5833L 55.3457,39.5833C 54.5457,48.4603 47.0852,55.4167 38,55.4167C 33.0092,55.4167 28.5088,53.3175 25.3333,49.954L 25.3333,58.5833L 20.5833,53.8333L 20.5833,41.1667L 33.25,41.1667L 38,45.9167L 29.1487,45.9167C 31.3231,48.3461 34.483,49.875 38,49.875 Z "/>
+                            <ContentPresenter x:Name="contentPresenter" Margin="7,0,0,0" TextElement.FontSize="18" Grid.Column="1" TextElement.FontFamily="Segoe Ui Lihgt" TextElement.Foreground="#FFB9B9B9"></ContentPresenter>
                         </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard x:Name="Storyboard2_BeginStoryboard" Storyboard="{StaticResource Storyboard2}"/>
+                                </Trigger.ExitActions>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
+                                </Trigger.EnterActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="Check_LISTBOX" TargetType="{x:Type CheckBox}">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border x:Name="checkBoxBorder" BorderBrush="#FF626262" BorderThickness="{TemplateBinding BorderThickness}" Background="White" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <Grid x:Name="markGrid">
+                                    <Ellipse Height="8" Width="8" x:Name="optionMark" Margin="1.3" Opacity="1" Fill="#FFD65532"></Ellipse>
+                                </Grid>
+                            </Border>
+                            <ContentPresenter x:Name="contentPresenter" TextElement.FontFamily="Segoe Ui light" TextElement.Foreground="#FFB9B9B9" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Fill" TargetName="optionMark" Value="#FF79C918"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
 
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -336,13 +409,13 @@
                             </Grid.ColumnDefinitions>
                             <Border Grid.ColumnSpan="10" BorderThickness="0,0,0,1" BorderBrush="#FF5B7184"></Border>
                             <TextBlock Text="{Binding xField, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBlock>
-                            <CheckBox Grid.Column="1" IsChecked="{Binding bxField, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></CheckBox>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding bxField, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource Check_LISTBOX}"></CheckBox>
                             <TextBlock Text="{Binding xTipo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="2"></TextBlock>
-                            <CheckBox IsChecked="{Binding bxTipo}" Grid.Column="3"></CheckBox>
+                            <CheckBox IsChecked="{Binding bxTipo}" Grid.Column="3" Style="{StaticResource Check_LISTBOX}"></CheckBox>
                             <TextBlock Text="Is not null" Grid.Column="4"></TextBlock>
-                            <CheckBox Grid.Column="5" IsChecked="{Binding bisNotNull, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></CheckBox>
-                            <TextBlock Text="{Binding xTamanho, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="6"></TextBlock>
-                            <CheckBox Grid.Column="7" IsChecked="{Binding bPosicao, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ></CheckBox>
+                            <CheckBox Grid.Column="5" IsChecked="{Binding bisNotNull, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource Check_LISTBOX}"></CheckBox>
+                            <TextBlock Text="{Binding posicao, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="6"></TextBlock>
+                            <CheckBox Grid.Column="7" IsChecked="{Binding bPosicao, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource Check_LISTBOX}"></CheckBox>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -392,7 +465,7 @@
                     <RowDefinition Height="Auto" MaxHeight="23"></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBox Style="{DynamicResource TextBox_TABLES}" Text="Tables" Height="40" Margin="0,0,0,5" VerticalAlignment="Bottom"></TextBox>
+                <TextBox Style="{DynamicResource TextBox_TABLES}" Text="Tables" Height="25" Margin="0,0,0,5" VerticalAlignment="Bottom"></TextBox>
                 <TextBox 
                     Text="{Binding xValueFind, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     Height="20" Margin="0,0,0,3" Grid.Row="2">
@@ -400,8 +473,6 @@
                         <KeyBinding Key="Enter" Command="{Binding FindTableCommand}"/>
                     </TextBox.InputBindings>
                 </TextBox>
-
-
                 <CheckBox 
                     IsChecked="{Binding bisChecked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                     Command="{Binding SelectAllCommand}" Style="{StaticResource Check_ANALYZE}"
@@ -434,8 +505,8 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
                     <DockPanel LastChildFill="True">
-                        <Button DockPanel.Dock="Left" Command="{Binding ExecuteAnalyzeCommand}" Width="130" Height="25" Margin="0,0,30,0" Content="Analyze" Style="{StaticResource Button_ANALYZE}"></Button>
-                        <TextBox DockPanel.Dock="Left" Style="{DynamicResource TextBox_TABLES}" Text="Selected Tables" Height="40" Margin="0,0,0,5" VerticalAlignment="Bottom"></TextBox>
+                        <Button DockPanel.Dock="Left" Command="{Binding ExecuteAnalyzeCommand}" Width="95" Height="25" Margin="0,0,30,0" Content="Analyze" Style="{StaticResource Button_ANALYZE}"></Button>
+                        <TextBox DockPanel.Dock="Left" Style="{DynamicResource TextBox_TABLES}" Text="Selected Tables" Height="25" Margin="0,0,0,5" VerticalAlignment="Bottom"></TextBox>
                     </DockPanel>
                     <ListBox x:Name="lbSelected" Height="150" Grid.Row="2" ItemsSource="{Binding lTableSelected}"  >
                         <ListBox.ItemsPanel>
@@ -469,7 +540,7 @@
                             <RowDefinition Height="10"></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <TextBox Style="{DynamicResource TextBox_TABLES}" Text="Database 1 " Height="40" Margin="0,0,0,5" VerticalAlignment="Bottom"></TextBox>
+                        <TextBox Style="{DynamicResource TextBox_TABLES}" Text="Database 1 " Height="25" Margin="0,0,0,5" VerticalAlignment="Bottom"></TextBox>
                         <ListBox Grid.Row="2" ItemsSource="{Binding currentModel.currentTablePrincipal.lField}" ItemContainerStyle="{StaticResource ListBoxItemCONEXOIES}">                            
                         </ListBox>
                     </Grid>
@@ -480,7 +551,7 @@
                             <RowDefinition Height="10"></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <TextBox Style="{DynamicResource TextBox_TABLES}" Text="Database 2 " Height="40" Margin="0,0,0,5" VerticalAlignment="Bottom"></TextBox>
+                        <TextBox Style="{DynamicResource TextBox_TABLES}" Text="Database 2 " Height="25" Margin="0,0,0,5" VerticalAlignment="Bottom"></TextBox>
                         <ListBox Grid.Row="2" ItemsSource="{Binding currentModel.currentTableSecundary.lField}" ItemContainerStyle="{StaticResource ListBoxItemCONEXOIES}"/>
                     </Grid>
 
