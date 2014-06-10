@@ -491,6 +491,7 @@
                             <RowDefinition Height="40"></RowDefinition>
                             <RowDefinition Height="10"></RowDefinition>
                             <RowDefinition></RowDefinition>
+                            <RowDefinition Height="20"></RowDefinition>
                             <RowDefinition Height="60"></RowDefinition>
                         </Grid.RowDefinitions>
                         <TextBox Style="{DynamicResource TextBox_TABLES}" Text="{Binding xBasePrincipal}" Height="25" Margin="0,0,0,5" VerticalAlignment="Bottom"></TextBox>
@@ -522,7 +523,7 @@
                                             </DockPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>                                
+                                </DataGridTemplateColumn>
                                 <DataGridTemplateColumn Width="52" Header="Not null">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -546,7 +547,8 @@
                             </DataGrid.Columns>
 
                         </DataGrid>
-                        <TextBlock Grid.Row="3" Foreground="#FFB9B9B9" FontFamily="Segoe UI Light" Margin="0,3,0,0"></TextBlock>
+                        <Label Content="Results" Grid.Row="2" Foreground="#FFB9B9B9" FontFamily="Segoe Ui" Margin="0,201,0,0" Grid.RowSpan="2"/>
+                        <TextBlock Grid.Row="4" Foreground="#FFB9B9B9" FontFamily="Segoe UI Light" Margin="0,3,0,0"></TextBlock>
                     </Grid>
 
                     <Grid Grid.Row="1" Grid.Column="2">
@@ -554,9 +556,10 @@
                             <RowDefinition Height="40"></RowDefinition>
                             <RowDefinition Height="10"></RowDefinition>
                             <RowDefinition></RowDefinition>
+                            <RowDefinition Height="20"></RowDefinition>
                             <RowDefinition Height="60"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <TextBox Style="{DynamicResource TextBox_TABLES}" Text="{Binding xBaseSecundary}" Height="25" Margin="0,0,0,5" VerticalAlignment="Bottom"></TextBox>                       
+                        <TextBox Style="{DynamicResource TextBox_TABLES}" Text="{Binding xBaseSecundary}" Height="25" Margin="0,0,0,5" VerticalAlignment="Bottom"></TextBox>
                         <DataGrid
                             Grid.Row="2"
                             AutoGenerateColumns="False"    
@@ -610,6 +613,7 @@
                             </DataGrid.Columns>
 
                         </DataGrid>
+                        <Label Content="Results" Grid.Row="2" Foreground="#FFB9B9B9" FontFamily="Segoe Ui" Margin="0,201,0,0" Grid.RowSpan="2"/>
                         <TextBlock Grid.Row="3" Foreground="#FFB9B9B9" FontFamily="Segoe UI Light" Margin="0,3,0,0"></TextBlock>
                     </Grid>
 
