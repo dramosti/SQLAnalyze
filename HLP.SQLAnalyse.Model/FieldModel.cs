@@ -51,6 +51,8 @@ namespace HLP.SQLAnalyse.Model
                 case "BIT": this.xTipo = "BIT"; break;
                 case "TINYINT": this.xTipo = "TINYINT"; break;
                 case "TIME": this.xTipo = "TIME"; break;
+                case "IMAGE": this.xTipo = "IMAGE"; break;
+                case "DATETIME": this.xTipo = "DATETIME"; break;
                 default: this.xTipo = ""; break;
             }
 
@@ -153,6 +155,15 @@ namespace HLP.SQLAnalyse.Model
             }
         }
 
+        private bool _wasAnalyze = false;
+
+        public bool wasAnalyze
+        {
+            get { return _wasAnalyze ; }
+            set { _wasAnalyze  = value; }
+        }
+        
+
         #endregion
 
         public void SetTrueValidacao()
@@ -163,6 +174,8 @@ namespace HLP.SQLAnalyse.Model
         {
             this.bisNotNull = this.bPosicao = this.bxField = this.bxTipo = false;
         }
+
+        public bool Success { get { return (this.bxField == true && this.bxTipo == true && this.bisNotNull == true && this.bPosicao == true); } }
     }
     public partial class FieldModel
     {

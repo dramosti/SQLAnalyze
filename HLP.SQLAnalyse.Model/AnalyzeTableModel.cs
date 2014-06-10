@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace HLP.SQLAnalyse.Model
 {
@@ -45,10 +47,36 @@ namespace HLP.SQLAnalyse.Model
             }
         }
 
-        
+
+        private ObservableCollection<TableModel> _lTablePrincipalResult = new ObservableCollection<TableModel>();
+        public ObservableCollection<TableModel> lTablePrincipalResult
+        {
+            get { return _lTablePrincipalResult; }
+            set
+            {
+                _lTablePrincipalResult = value;
+                base.NotifyPropertyChanged(propertyName: "lTablePrincipalResult");
+            }
+        }
+
+        private ObservableCollection<TableModel> _lTableSecundaryResult = new ObservableCollection<TableModel>();
+        public ObservableCollection<TableModel> lTableSecundaryResult
+        {
+            get { return _lTableSecundaryResult; }
+            set
+            {
+                _lTableSecundaryResult = value;
+                base.NotifyPropertyChanged(propertyName: "lTableSecundaryResult");
+            }
+        }
+                
+
+
+
+
         private TableModel _currentTablePrincipal = new TableModel();
         public TableModel currentTablePrincipal
-        { 
+        {
             get { return _currentTablePrincipal; }
             set
             {
@@ -57,9 +85,7 @@ namespace HLP.SQLAnalyse.Model
             }
         }
 
-        
         private TableModel _currentTableSecundary = new TableModel();
-
         public TableModel currentTableSecundary
         {
             get { return _currentTableSecundary; }
@@ -69,21 +95,21 @@ namespace HLP.SQLAnalyse.Model
                 base.NotifyPropertyChanged(propertyName: "currentTableSecundary");
             }
         }
-        
-        
 
 
-        private ObservableCollection<TableModel> _lTableToSelect = new ObservableCollection<TableModel>();
+
+
+        private ObservableCollection<TableModel> _lTableSelected = new ObservableCollection<TableModel>();
         /// <summary>
         /// Lista de tabelas para ser manipulada e ficar a disposição de selecionar.
         /// </summary>
-        public ObservableCollection<TableModel> lTableToSelect
+        public ObservableCollection<TableModel> lTableSelected
         {
-            get { return _lTableToSelect; }
+            get { return _lTableSelected; }
             set
             {
-                _lTableToSelect = value;
-                base.NotifyPropertyChanged(propertyName: "lTableToSelect");
+                _lTableSelected = value;
+                base.NotifyPropertyChanged(propertyName: "lTableSelected");
             }
         }
 
@@ -93,32 +119,77 @@ namespace HLP.SQLAnalyse.Model
             {
                 TableModel tableSecundary = null;
                 FieldModel fieldSecundary = null;
+                this.lTablePrincipalResult = new ObservableCollection<TableModel>();
+                this.lTableSecundaryResult = new ObservableCollection<TableModel>();
+                TableModel tablePrimaryResult = null;
+                TableModel tableSecundaryResult = null;
 
-                foreach (var tablePrincipal in lTablePrincipal)
+                foreach (var tablePrincipal in lTablePrincipal.Where(c => c.isSelect))
                 {
-                    //busca a tabela a ser analisada
-                    tableSecundary = lTableSecudary.FirstOrDefault(c => c.xTable == tablePrincipal.xTable);
-
-                    if (tableSecundary != null)
+                    try
                     {
-                        //percorre os campos da tabela principal da 1º conexão
-                        foreach (FieldModel fieldPrincipal in tablePrincipal.lField)
-                        {
-                            fieldSecundary = tableSecundary.lField.FirstOrDefault(c => c.xField == fieldPrincipal.xField);
+                        //busca a tabela a ser analisada
+                        tableSecundary = lTableSecudary.FirstOrDefault(c => c.xTable == tablePrincipal.xTable);
 
-                            // se existir o campo eu analiso todos os campos, caso nao tenha, eu deixo tudo como inválido.
-                            if (fieldSecundary != null)
+                        if (tableSecundary != null)
+                        {
+                            tablePrimaryResult = new TableModel();
+                            tableSecundaryResult = new TableModel();
+                            tablePrimaryResult.xTable = tableSecundaryResult.xTable = tablePrincipal.xTable;
+
+
+                            //percorre os campos da tabela principal da 1º conexão
+                            foreach (FieldModel fieldPrincipal in tablePrincipal.lField)
                             {
-                                fieldPrincipal.SetTrueValidacao();
-                                fieldSecundary.bxTipo = fieldPrincipal.xTipo == fieldSecundary.xTipo;
-                                fieldSecundary.bisNotNull = fieldPrincipal.isNotNul == fieldSecundary.isNotNul;
-                                fieldSecundary.bPosicao = fieldPrincipal.posicao == fieldSecundary.posicao;
+                                fieldSecundary = tableSecundary.lField.FirstOrDefault(c => c.xField == fieldPrincipal.xField);
+
+                                // se existir o campo eu analiso todos os campos, caso nao tenha, eu deixo tudo como inválido.
+                                if (fieldSecundary != null)
+                                {
+                                    fieldPrincipal.SetTrueValidacao();
+                                    fieldPrincipal.wasAnalyze = fieldSecundary.wasAnalyze = fieldSecundary.bxField = true;
+                                    fieldSecundary.bxTipo = fieldPrincipal.xTipo == fieldSecundary.xTipo;
+                                    fieldSecundary.bisNotNull = fieldPrincipal.isNotNul == fieldSecundary.isNotNul;
+                                    fieldSecundary.bPosicao = fieldPrincipal.posicao == fieldSecundary.posicao;
+                                    if (!fieldSecundary.Success)
+                                    {
+                                        tablePrimaryResult.lField.Add(fieldPrincipal);
+                                        tableSecundaryResult.lField.Add(fieldSecundary);
+                                    }
+                                }
+                                else
+                                {
+                                    fieldPrincipal.SetFalseValidacao();
+                                }
+
                             }
-                            else
-                                fieldPrincipal.SetFalseValidacao();
+                            if (tablePrimaryResult.lField.Count() > 0)
+                            {
+                                //Application.Current.Dispatcher.BeginInvoke((Action)(() =>
+                                //{
+                                foreach (var item in tableSecundary.lField.Where(c => c.wasAnalyze == false))
+                                {
+                                    tableSecundaryResult.lField.Add(item);
+                                }
+                                foreach (var item in tablePrincipal.lField.Where(c => c.wasAnalyze == false))
+                                {
+                                    tablePrimaryResult.lField.Add(item);
+                                }
+
+                                this.lTablePrincipalResult.Add(tablePrimaryResult);
+                                this.lTableSecundaryResult.Add(tableSecundaryResult);
+                                //}));
+                            }
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
                 }
+
+
+
             }
             catch (Exception ex)
             {

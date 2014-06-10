@@ -23,43 +23,34 @@ namespace HLP.SQLAnalyse.View
         Window WinPrincipal;
         public WinSQLAnalyse(object WinPrincipal, AnalyzeViewModel ViewModel)
         {
-
             InitializeComponent();
             this.ViewModel = ViewModel;
             this.WinPrincipal = WinPrincipal as Window;
             lbSelected.KeyDown += this.ViewModel.ListBox_KeyDown;
             lbSelected.SelectionChanged += this.ViewModel.lbSelected_SelectionChanged;
-            
         }
-
-      
-
         public AnalyzeViewModel ViewModel
         {
             get { return this.DataContext as AnalyzeViewModel; }
             set { this.DataContext = value; }
         }
-
         public static void ShowAnalyse(object WinPrincipal, object objViewModel)
         {
             Application.Current.Dispatcher.BeginInvoke((Action)(() =>
            {
                WinSQLAnalyse win = new WinSQLAnalyse(WinPrincipal, objViewModel as AnalyzeViewModel);
-               win.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-               win.Show();
+               win.WindowState = WindowState.Maximized;
+               win.ShowDialog();
            }));
-        }
-
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
 
         }
-
-        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
         }
-
-        
+        public void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            WinPrincipal.Visibility = System.Windows.Visibility.Visible;
+        }
     }
 }
