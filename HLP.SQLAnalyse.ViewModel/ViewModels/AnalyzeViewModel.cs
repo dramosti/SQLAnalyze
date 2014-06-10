@@ -17,6 +17,7 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
         public ICommand FecharCommand { get; set; }
         public ICommand MinimizeCommand { get; set; }
 
+        public ICommand FieldNotFoundCommand { get; set; }
         public ICommand TestarCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand NextCommand { get; set; }
@@ -35,7 +36,7 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
                 base.NotifyPropertyChanged(propertyName: "xBasePrincipal");
             }
         }
-        
+
         private string _xBaseSecundary;
         public string xBaseSecundary
         {
@@ -53,7 +54,7 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
             command = new AnalyzeCommand(ViewModel: this);
             this.currentConexao.xLogin = "SA";
             this.currentConexao.xPassword = "H029060tSql";
-            
+
         }
 
         public AnalyzeCommand command { get; set; }
@@ -117,17 +118,42 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
 
         public void lbSelected_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            this.SetVisibleFields((sender as ListBox).SelectedItem as TableModel);
+        }
+
+        public void SetVisibleFields(TableModel objTableModel)
+        {
+            objTableModel = this.currentModel.lTablePrincipal.FirstOrDefault(c => c.xTable == objTableModel.xTable);
             this.currentModel.currentTablePrincipal = new TableModel();
             this.currentModel.currentTableSecundary = new TableModel();
 
-            this.currentModel.currentTablePrincipal = (sender as ListBox).SelectedItem as TableModel;
+            if (this.currentModel.bFieldNotFound)
+            {
+                this.currentModel.currentTablePrincipal.xTable = objTableModel.xTable;
+                foreach (var item in objTableModel.lField.Where(c => c.bxField == false))
+                {
+                    this.currentModel.currentTablePrincipal.lField.Add(item);
+                }
 
-            if (this.currentModel.currentTablePrincipal != null)
-                this.currentModel.currentTableSecundary = this.currentModel.lTableSecundaryResult.FirstOrDefault(c => c.xTable == this.currentModel.currentTablePrincipal.xTable);
+                TableModel objTableSecundaryModel = this.currentModel.lTableSecundaryResult.FirstOrDefault(c => c.xTable == this.currentModel.currentTablePrincipal.xTable);
+
+                if (objTableSecundaryModel != null)
+                {
+                    foreach (var item in objTableSecundaryModel.lField.Where(c => c.bxField == false))
+                    {
+                        this.currentModel.currentTableSecundary.lField.Add(item);
+                    }
+                }
+            }
+            else
+            {
+                this.currentModel.currentTablePrincipal = objTableModel;
+
+                if (this.currentModel.currentTablePrincipal != null)
+                    this.currentModel.currentTableSecundary = this.currentModel.lTableSecundaryResult.FirstOrDefault(c => c.xTable == this.currentModel.currentTablePrincipal.xTable);
+            }
+
         }
-
-       
-       
 
     }
 }

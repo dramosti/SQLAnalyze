@@ -474,7 +474,7 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <CheckBox Grid.Row="3" Content="Fields not found" Style="{StaticResource Check_ANALYZE}" Margin="0,2,0,0"></CheckBox>
+                    <CheckBox Command="{Binding FieldNotFoundCommand}" IsChecked="{Binding currentModel.bFieldNotFound, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Row="3" Content="Fields not found" Style="{StaticResource Check_ANALYZE}" Margin="0,2,0,0"></CheckBox>
                 </Grid>
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>

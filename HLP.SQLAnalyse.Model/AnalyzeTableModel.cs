@@ -69,10 +69,17 @@ namespace HLP.SQLAnalyse.Model
                 base.NotifyPropertyChanged(propertyName: "lTableSecundaryResult");
             }
         }
-                
 
-
-
+        private bool _bFieldNotFound = false;
+        public bool bFieldNotFound
+        {
+            get { return _bFieldNotFound; }
+            set
+            {
+                _bFieldNotFound = value;
+                base.NotifyPropertyChanged(propertyName: "bFieldNotFound");               
+            }
+        }
 
         private TableModel _currentTablePrincipal = new TableModel();
         public TableModel currentTablePrincipal
