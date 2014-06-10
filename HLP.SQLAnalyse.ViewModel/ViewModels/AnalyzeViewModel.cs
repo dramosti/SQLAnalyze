@@ -17,6 +17,7 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
         public ICommand FecharCommand { get; set; }
         public ICommand MinimizeCommand { get; set; }
 
+        public ICommand FieldNotFoundCommand { get; set; }
         public ICommand TestarCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand NextCommand { get; set; }
@@ -122,6 +123,7 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
 
         public void SetVisibleFields(TableModel objTableModel)
         {
+            objTableModel = this.currentModel.lTablePrincipal.FirstOrDefault(c => c.xTable == objTableModel.xTable);
             this.currentModel.currentTablePrincipal = new TableModel();
             this.currentModel.currentTableSecundary = new TableModel();
 
