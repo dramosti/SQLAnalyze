@@ -123,7 +123,7 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
 
         public void SetVisibleFields(TableModel objTableModel)
         {
-            objTableModel = this.currentModel.lTablePrincipal.FirstOrDefault(c => c.xTable == objTableModel.xTable);
+            objTableModel = this.currentModel.lTablePrincipalResult.FirstOrDefault(c => c.xTable == objTableModel.xTable);
             this.currentModel.currentTablePrincipal = new TableModel();
             this.currentModel.currentTableSecundary = new TableModel();
 

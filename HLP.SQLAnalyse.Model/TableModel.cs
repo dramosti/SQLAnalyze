@@ -1,6 +1,7 @@
 ﻿using HLP.Base.ClassesBases;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,8 +35,8 @@ namespace HLP.SQLAnalyse.Model
             }
         }
 
-        private List<FieldModel> _lField = new List<FieldModel>();
-        public List<FieldModel> lField
+        private ObservableCollection<FieldModel> _lField = new ObservableCollection<FieldModel>();
+        public ObservableCollection<FieldModel> lField
         {
             get { return _lField;  }
             set
