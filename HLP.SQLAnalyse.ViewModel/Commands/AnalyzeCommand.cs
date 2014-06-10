@@ -51,6 +51,8 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
 
             this.ViewModel.MinimizeCommand = new RelayCommand(execute: i => Static.MinimizeWindow(i),
                canExecute: i => true);
+            this.ViewModel.FieldNotFoundCommand = new RelayCommand(execute: i => this.ViewModel.SetVisibleFields(this.ViewModel.currentModel.currentTablePrincipal),
+             canExecute: i => true);
 
 
 
@@ -65,7 +67,7 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
 
         #region Commands
 
-        
+
 
         public void AddConexao()
         {
