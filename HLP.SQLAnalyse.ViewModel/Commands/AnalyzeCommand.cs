@@ -158,7 +158,12 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
         #region Can Executes
         private bool CanExecuteAnalyze()
         {
-            return this.ViewModel.currentModel.lTablePrincipal.Where(c => c.isSelect).Count() > 0;
+            return (
+                this.ViewModel.currentModel.lTablePrincipal.Where(c => c.isSelect).Count() > 0
+                &&
+                this.bWorkerExecuteAnalyze.IsBusy == false
+                );
+
         }
         private bool CanFindTable()
         {
@@ -196,19 +201,22 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
         {
             try
             {
+                this.ViewModel.currentModel.currentTablePrincipal = new TableModel();
+                this.ViewModel.currentModel.currentTableSecundary = new TableModel();
                 TableModel TableSecundary = null;
                 foreach (var TablePrincipal in this.ViewModel.currentModel.lTablePrincipal.Where(c => c.isSelect))
                 {
                     try
                     {
                         operacao = new OperacoesSqlRepository(this.ViewModel.currentModel.conexoes.FirstOrDefault().ConnectionStringCompleted);
-                        TablePrincipal.lField = operacao.GetDetalhes(TablePrincipal.xTable);
+                        TablePrincipal.lField = new System.Collections.ObjectModel.ObservableCollection<FieldModel>(operacao.GetDetalhes(TablePrincipal.xTable));
                         TableSecundary = this.ViewModel.currentModel.lTableSecudary.FirstOrDefault(c => c.xTable == TablePrincipal.xTable);
                         if (TableSecundary != null)
                         {
                             operacao = new OperacoesSqlRepository(this.ViewModel.currentModel.conexoes.LastOrDefault().ConnectionStringCompleted);
-                            TableSecundary.lField = operacao.GetDetalhes(TableSecundary.xTable);
+                            TableSecundary.lField = new System.Collections.ObjectModel.ObservableCollection<FieldModel>(operacao.GetDetalhes(TableSecundary.xTable));
                         }
+                       
                     }
                     catch (Exception ex)
                     {

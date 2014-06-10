@@ -123,36 +123,41 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
 
         public void SetVisibleFields(TableModel objTableModel)
         {
-            objTableModel = this.currentModel.lTablePrincipalResult.FirstOrDefault(c => c.xTable == objTableModel.xTable);
-            this.currentModel.currentTablePrincipal = new TableModel();
-            this.currentModel.currentTableSecundary = new TableModel();
-
-            if (this.currentModel.bFieldNotFound)
+            if (objTableModel != null)
             {
-                this.currentModel.currentTablePrincipal.xTable = objTableModel.xTable;
-                foreach (var item in objTableModel.lField.Where(c => c.bxField == false))
+                if (objTableModel.xTable != null)
                 {
-                    this.currentModel.currentTablePrincipal.lField.Add(item);
-                }
+                    objTableModel = this.currentModel.lTablePrincipalResult.FirstOrDefault(c => c.xTable == objTableModel.xTable);
+                    this.currentModel.currentTablePrincipal = new TableModel();
+                    this.currentModel.currentTableSecundary = new TableModel();
 
-                TableModel objTableSecundaryModel = this.currentModel.lTableSecundaryResult.FirstOrDefault(c => c.xTable == this.currentModel.currentTablePrincipal.xTable);
-
-                if (objTableSecundaryModel != null)
-                {
-                    foreach (var item in objTableSecundaryModel.lField.Where(c => c.bxField == false))
+                    if (this.currentModel.bFieldNotFound)
                     {
-                        this.currentModel.currentTableSecundary.lField.Add(item);
+                        this.currentModel.currentTablePrincipal.xTable = objTableModel.xTable;
+                        foreach (var item in objTableModel.lField.Where(c => c.bxField == false))
+                        {
+                            this.currentModel.currentTablePrincipal.lField.Add(item);
+                        }
+
+                        TableModel objTableSecundaryModel = this.currentModel.lTableSecundaryResult.FirstOrDefault(c => c.xTable == this.currentModel.currentTablePrincipal.xTable);
+
+                        if (objTableSecundaryModel != null)
+                        {
+                            foreach (var item in objTableSecundaryModel.lField.Where(c => c.bxField == false))
+                            {
+                                this.currentModel.currentTableSecundary.lField.Add(item);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        this.currentModel.currentTablePrincipal = objTableModel;
+
+                        if (this.currentModel.currentTablePrincipal != null)
+                            this.currentModel.currentTableSecundary = this.currentModel.lTableSecundaryResult.FirstOrDefault(c => c.xTable == this.currentModel.currentTablePrincipal.xTable);
                     }
                 }
             }
-            else
-            {
-                this.currentModel.currentTablePrincipal = objTableModel;
-
-                if (this.currentModel.currentTablePrincipal != null)
-                    this.currentModel.currentTableSecundary = this.currentModel.lTableSecundaryResult.FirstOrDefault(c => c.xTable == this.currentModel.currentTablePrincipal.xTable);
-            }
-
         }
 
     }
