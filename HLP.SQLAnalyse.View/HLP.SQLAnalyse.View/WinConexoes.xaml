@@ -769,11 +769,14 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                        <Border x:Name="Bd" BorderBrush="#FF5B7184" BorderThickness="0,0,0,1" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" TextElement.Foreground="#FF626262" TextElement.FontFamily="Segoe Ui light" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <Border x:Name="Bd" BorderBrush="#FF5B7184" BorderThickness="0,0,0,1" Background="Transparent" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" TextElement.Foreground="#FF626262" TextElement.FontFamily="Segoe Ui light" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
                         <ControlTemplate.Triggers>
-
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#FF5B7184" TargetName="Bd"></Setter>
+                                <Setter Property="TextElement.Foreground" Value="White" TargetName="contentPresenter"></Setter>
+                            </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
