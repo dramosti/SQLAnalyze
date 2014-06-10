@@ -25,15 +25,17 @@ namespace HLP.SQLAnalyse.View
         {
             InitializeComponent();
             this.ViewModel = new AnalyzeViewModel();
-            txtPassword.LostFocus+=txtPassword_LostFocus;
+            txtPassword.LostFocus += txtPassword_LostFocus;
         }
 
         public void txtPassword_LostFocus(object sender, RoutedEventArgs e)
         {
-           this.ViewModel.command.CarregaBases();
+            if (this.ViewModel.servers.Count() > 0)
+                if (!this.ViewModel.servers.FirstOrDefault().Contains("SEARCH"))
+                    this.ViewModel.command.CarregaBases();
         }
 
-        public AnalyzeViewModel ViewModel 
+        public AnalyzeViewModel ViewModel
         {
             get { return this.DataContext as AnalyzeViewModel; }
             set { this.DataContext = value; }
@@ -43,16 +45,6 @@ namespace HLP.SQLAnalyse.View
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = System.Windows.WindowState.Minimized; 
         }
     }
 }

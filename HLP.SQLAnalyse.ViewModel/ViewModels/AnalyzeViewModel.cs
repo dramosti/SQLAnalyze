@@ -14,6 +14,9 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
 {
     public class AnalyzeViewModel : ViewModelBase<AnalyzeTableModel>
     {
+        public ICommand FecharCommand { get; set; }
+        public ICommand MinimizeCommand { get; set; }
+
         public ICommand TestarCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand NextCommand { get; set; }
@@ -21,10 +24,28 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
         public ICommand ExecuteAnalyzeCommand { get; set; }
         public ICommand SelectAllCommand { get; set; }
         public ICommand FindTableCommand { get; set; }
-        public ICommand CheckBoxSelectCommand { get; set; }
-
-
         public string tpAnalyze { get; set; }
+        private string _xBasePrincipal;
+        public string xBasePrincipal
+        {
+            get { return _xBasePrincipal; }
+            set
+            {
+                _xBasePrincipal = value;
+                base.NotifyPropertyChanged(propertyName: "xBasePrincipal");
+            }
+        }
+        
+        private string _xBaseSecundary;
+        public string xBaseSecundary
+        {
+            get { return _xBaseSecundary; }
+            set
+            {
+                _xBaseSecundary = value;
+                base.NotifyPropertyChanged(propertyName: "xBaseSecundary");
+            }
+        }
 
         public AnalyzeViewModel()
         {
@@ -32,29 +53,11 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
             command = new AnalyzeCommand(ViewModel: this);
             this.currentConexao.xLogin = "SA";
             this.currentConexao.xPassword = "H029060tSql";
-
+            
         }
 
         public AnalyzeCommand command { get; set; }
-
-        private ObservableCollection<TableModel> _lTableSelected = new ObservableCollection<TableModel>();
-        /// <summary>
-        /// Lista de tabelas selecionadas para pesquisa
-        /// </summary>
-        public ObservableCollection<TableModel> lTableSelected
-        {
-            get { return _lTableSelected; }
-            set
-            {
-                _lTableSelected = value;
-                base.NotifyPropertyChanged(propertyName: "lTableSelected");
-            }
-        }
-
-
-
         private bool _bisChecked;
-
         public bool bisChecked
         {
             get { return _bisChecked; }
@@ -64,9 +67,6 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
                 base.NotifyPropertyChanged(propertyName: "bisChecked");
             }
         }
-
-
-
 
         private ConnectionConfigModel _currentConexao = new ConnectionConfigModel();
         public ConnectionConfigModel currentConexao
@@ -86,7 +86,7 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
             }
         }
 
-        private ObservableCollection<string> _bases;
+        private ObservableCollection<string> _bases = new ObservableCollection<string>();
         public ObservableCollection<string> bases
         {
             get { return _bases; }
@@ -108,11 +108,9 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
         {
             if (e.Key == Key.Delete)
             {
-                if (this.lTableSelected.Count() > 0)
+                if (this.currentModel.lTablePrincipal.Where(c => c.isSelect).Count() > 0)
                 {
                     ((TableModel)(sender as ListBox).SelectedItem).isSelect = false;
-                    this.lTableSelected.Remove((TableModel)(sender as ListBox).SelectedItem);
-
                 }
             }
         }
@@ -125,8 +123,11 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
             this.currentModel.currentTablePrincipal = (sender as ListBox).SelectedItem as TableModel;
 
             if (this.currentModel.currentTablePrincipal != null)
-                this.currentModel.currentTableSecundary = this.currentModel.lTableSecudary.FirstOrDefault(c => c.xTable == this.currentModel.currentTablePrincipal.xTable);
+                this.currentModel.currentTableSecundary = this.currentModel.lTableSecundaryResult.FirstOrDefault(c => c.xTable == this.currentModel.currentTablePrincipal.xTable);
         }
+
+       
+       
 
     }
 }

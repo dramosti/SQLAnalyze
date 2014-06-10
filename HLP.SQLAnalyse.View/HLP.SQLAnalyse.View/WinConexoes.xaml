@@ -871,8 +871,8 @@
                 <ColumnDefinition Width="25"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1" Style="{StaticResource Button_MINIMIZAR}" Click="Button_Click_1" Margin="0,1,1,0"></Button>
-            <Button Grid.Column="2" Style="{StaticResource Button_FECHAR}" Click="Button_Click" Margin="0,1,1,0"></Button>
+            <Button Focusable="False" Command="{Binding MinimizeCommand}" CommandParameter="{Binding ElementName=winConexao}" Grid.Column="1" Style="{StaticResource Button_MINIMIZAR}"  Margin="0,1,1,0"></Button>
+            <Button Focusable="False" Command="{Binding fecharCommand}" CommandParameter="{Binding ElementName=winConexao}" Grid.Column="2" Style="{StaticResource Button_FECHAR}" Margin="0,1,1,0"></Button>
         </Grid>
 
         <!--Icone-->

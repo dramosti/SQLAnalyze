@@ -4,11 +4,22 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace HLP.SQLAnalyse.Model
 {
     public class Static
     {
+
+        public static void FecharWindow(object i)
+        {
+            (i as Window).Close();
+        }
+        public static void MinimizeWindow(object i)
+        {
+            (i as Window).WindowState = WindowState.Minimized;
+        }
+
         public static object ExecuteMethodByReflection(string xNamespace, string xType, string xMethod, object[] parameters)
         {
             Type t = GetTypeByReflection(xNamespace: xNamespace, xType: xType);
