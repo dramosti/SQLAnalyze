@@ -77,7 +77,7 @@ namespace HLP.SQLAnalyse.Model
             set
             {
                 _bFieldNotFound = value;
-                base.NotifyPropertyChanged(propertyName: "bFieldNotFound");               
+                base.NotifyPropertyChanged(propertyName: "bFieldNotFound");
             }
         }
 
@@ -148,25 +148,30 @@ namespace HLP.SQLAnalyse.Model
                             //percorre os campos da tabela principal da 1º conexão
                             foreach (FieldModel fieldPrincipal in tablePrincipal.lField)
                             {
+                                fieldPrincipal.xBase = this._conexoes.FirstOrDefault().xBaseDados;
                                 fieldSecundary = tableSecundary.lField.FirstOrDefault(c => c.xField == fieldPrincipal.xField);
 
                                 // se existir o campo eu analiso todos os campos, caso nao tenha, eu deixo tudo como inválido.
                                 if (fieldSecundary != null)
                                 {
+                                    fieldSecundary.xBase = this._conexoes.LastOrDefault().xBaseDados;
                                     fieldPrincipal.SetTrueValidacao();
                                     fieldPrincipal.wasAnalyze = fieldSecundary.wasAnalyze = fieldSecundary.bxField = true;
-                                    fieldSecundary.bxTipo = fieldPrincipal.xTipo == fieldSecundary.xTipo;
-                                    fieldSecundary.bisNotNull = fieldPrincipal.isNotNul == fieldSecundary.isNotNul;
-                                    fieldSecundary.bPosicao = fieldPrincipal.posicao == fieldSecundary.posicao;
+                                    fieldPrincipal.bxTipo = fieldSecundary.bxTipo = fieldPrincipal.xTipo == fieldSecundary.xTipo;
+                                    fieldPrincipal.bisNotNull = fieldSecundary.bisNotNull = fieldPrincipal.isNotNul == fieldSecundary.isNotNul;
+                                    fieldPrincipal.bPosicao = fieldSecundary.bPosicao = fieldPrincipal.posicao == fieldSecundary.posicao;
                                     if (!fieldSecundary.Success)
                                     {
                                         tablePrimaryResult.lField.Add(fieldPrincipal);
                                         tableSecundaryResult.lField.Add(fieldSecundary);
                                     }
+                                    fieldPrincipal.SetxResult();
+                                    fieldSecundary.SetxResult();
                                 }
                                 else
                                 {
                                     fieldPrincipal.SetFalseValidacao();
+                                    fieldPrincipal.SetxResult();
                                 }
 
                             }

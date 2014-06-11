@@ -12,8 +12,6 @@ D:\Projetos novos\SQLAnalyse\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\obj\Debug\H
 D:\Projetos novos\SQLAnalyse\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\obj\Debug\HLP.SQLAnalyse.View.exe
 D:\Projetos novos\SQLAnalyse\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\obj\Debug\HLP.SQLAnalyse.View.pdb
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\bin\Debug\HLP.SQLAnalyse.View.exe.config
-D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\obj\Debug\HLP.SQLAnalyse.View.exe
-D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\obj\Debug\HLP.SQLAnalyse.View.pdb
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\bin\Debug\HLP.SQLAnalyse.View.exe
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\bin\Debug\HLP.SQLAnalyse.View.pdb
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\obj\Debug\HLP.SQLAnalyze.View.csprojResolveAssemblyReference.cache
@@ -22,8 +20,6 @@ D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\obj\Debug\WinSQ
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\obj\Debug\WinConexoes.g.cs
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\obj\Debug\WinSQLAnalyse.g.cs
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\obj\Debug\App.g.cs
-D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\obj\Debug\HLP.SQLAnalyse.View_MarkupCompile.cache
-D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\obj\Debug\HLP.SQLAnalyse.View.g.resources
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\obj\Debug\HLP.SQLAnalyse.View.Properties.Resources.resources
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\obj\Debug\HLP.SQLAnalyze.View.csproj.GenerateResource.Cache
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\bin\Debug\HLP.Base.dll
@@ -43,4 +39,11 @@ D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\bin\Debug\HLP.S
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\bin\Debug\HLP.Base.pdb
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\bin\Debug\HLP.Report.View.WPF.pdb
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\obj\Debug\GeneratedInternalTypeHelper.g.cs
-D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\obj\Debug\HLP.SQLAnalyse.View_MarkupCompile.lref
+D:\GitHub\HLP\SQLAnalyze\bin\SqlAnalyze.exe.config
+D:\GitHub\HLP\SQLAnalyze\bin\SqlAnalyze.exe
+D:\GitHub\HLP\SQLAnalyze\bin\SqlAnalyze.pdb
+D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\obj\Debug\SqlAnalyze_MarkupCompile.cache
+D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\obj\Debug\SqlAnalyze_MarkupCompile.lref
+D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\obj\Debug\SqlAnalyze.g.resources
+D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\obj\Debug\SqlAnalyze.exe
+D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.View\HLP.SQLAnalyse.View\obj\Debug\SqlAnalyze.pdb

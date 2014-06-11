@@ -154,6 +154,7 @@ namespace HLP.SQLAnalyse.Model.Repository
                     {
                         objField = new FieldModel
                         {
+                            xTable = sNomeTabela,
                             xField = row[3].ToString(),
                             xTypeName = row[5].ToString(),
                             xTamanho = row[7].ToString(),

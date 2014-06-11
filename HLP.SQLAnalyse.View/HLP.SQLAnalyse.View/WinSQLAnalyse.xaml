@@ -406,7 +406,7 @@
 
         <Grid Grid.Column="1" Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition MinWidth="200" Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="2"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
@@ -445,7 +445,7 @@
 
             <GridSplitter ResizeDirection="Columns" Grid.Column="1" Height="482" VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="#FFB9B9B9" Width="2"></GridSplitter>
 
-            <Grid Grid.Column="3" Margin="50,0,0,0" >
+            <Grid Grid.Column="3" Margin="15,0,0,0" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition></RowDefinition>
@@ -496,13 +496,13 @@
                         </Grid.RowDefinitions>
                         <TextBox Style="{DynamicResource TextBox_TABLES}" Text="{Binding xBasePrincipal}" Height="25" Margin="0,0,0,5" VerticalAlignment="Bottom"></TextBox>
                         <DataGrid
+                            x:Name="dgvFieldPrimary"
                             AutoGenerateColumns="False"    
-                            IsReadOnly="True"
                             SelectionUnit="FullRow" 
-                            CanUserReorderColumns="False" 
-                            CanUserDeleteRows="True" 
-                            CanUserAddRows="True" 
-                            Grid.Row="2" ItemsSource="{Binding currentModel.currentTablePrincipal.lField}">
+                            CanUserReorderColumns="True" 
+                            CanUserDeleteRows="False" 
+                            CanUserAddRows="False" 
+                            Grid.Row="2" ItemsSource="{Binding currentModel.currentTablePrincipal.lField}" SelectedItem="{Binding currentFieldPrincipal}">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Width="*" Header="Field">
                                     <DataGridTemplateColumn.CellTemplate>
@@ -514,7 +514,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Width="90" Header="Type">
+                                <DataGridTemplateColumn Width="105" Header="Type">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <DockPanel LastChildFill="True">
@@ -528,7 +528,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <DockPanel LastChildFill="True">
-                                                <CheckBox IsEnabled="False" Focusable="False" IsChecked="{Binding bisNotNul}" Grid.Column="3" Style="{StaticResource Check_LISTBOX}"></CheckBox>
+                                                <CheckBox IsEnabled="False" Focusable="False" IsChecked="{Binding bisNotNull}" Grid.Column="3" Style="{StaticResource Check_LISTBOX}"></CheckBox>
                                                 <TextBlock Margin="3,0,0,0" Text="{Binding isNotNul}"/>
                                             </DockPanel>
                                         </DataTemplate>
@@ -548,7 +548,7 @@
 
                         </DataGrid>
                         <Label Content="Results" Grid.Row="3" Foreground="#FFB9B9B9" FontFamily="Segoe Ui"/>
-                        <TextBlock Grid.Row="4" Foreground="#FFB9B9B9" FontFamily="Segoe UI Light" Margin="0,3,0,0"></TextBlock>
+                        <TextBlock Grid.Row="4" TextWrapping="Wrap" Text="{Binding ElementName=dgvPrincipal, Path=CurrentItem.xResult}" Foreground="#FFB9B9B9" FontFamily="Segoe UI Light" Margin="0,3,0,0"></TextBlock>
                     </Grid>
 
                     <Grid Grid.Row="1" Grid.Column="2">
@@ -561,14 +561,14 @@
                         </Grid.RowDefinitions>
                         <TextBox Style="{DynamicResource TextBox_TABLES}" Text="{Binding xBaseSecundary}" Height="25" Margin="0,0,0,5" VerticalAlignment="Bottom"></TextBox>
                         <DataGrid
+                            x:Name="dgvFieldSecundary"
                             Grid.Row="2"
                             AutoGenerateColumns="False"    
-                            IsReadOnly="True"
                             SelectionUnit="FullRow" 
                             CanUserReorderColumns="False" 
                             CanUserDeleteRows="True" 
-                            CanUserAddRows="True" 
-                            ItemsSource="{Binding currentModel.currentTableSecundary.lField}">
+                            CanUserAddRows="False" 
+                            ItemsSource="{Binding currentModel.currentTableSecundary.lField}" SelectedItem="{Binding currentFieldSecundary}">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Width="*" Header="Field">
                                     <DataGridTemplateColumn.CellTemplate>
@@ -580,7 +580,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Width="90" Header="Type">
+                                <DataGridTemplateColumn Width="105" Header="Type">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <DockPanel LastChildFill="True">
@@ -594,7 +594,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <DockPanel LastChildFill="True">
-                                                <CheckBox IsEnabled="False" Focusable="False" IsChecked="{Binding bisNotNul}" Grid.Column="3" Style="{StaticResource Check_LISTBOX}"></CheckBox>
+                                                <CheckBox IsEnabled="False" Focusable="False" IsChecked="{Binding bisNotNull}" Grid.Column="3" Style="{StaticResource Check_LISTBOX}"></CheckBox>
                                                 <TextBlock Margin="3,0,0,0" Text="{Binding isNotNul}"/>
                                             </DockPanel>
                                         </DataTemplate>
@@ -614,7 +614,7 @@
 
                         </DataGrid>
                         <Label Content="Results" Grid.Row="3" Foreground="#FFB9B9B9" FontFamily="Segoe Ui"/>
-                        <TextBlock Grid.Row="4" Foreground="#FFB9B9B9" FontFamily="Segoe UI Light" Margin="0,3,0,0"></TextBlock>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding ElementName=dgvFieldSecundary, Path=CurrentItem.xResult}" Grid.Row="4" Foreground="#FFB9B9B9" FontFamily="Segoe UI Light" Margin="0,3,0,0"></TextBlock>
                     </Grid>
 
                 </Grid>

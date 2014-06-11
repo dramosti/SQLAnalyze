@@ -955,6 +955,7 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <ListBox 
+                    x:Name="lbServidores"
                     ItemsSource="{Binding currentModel.conexoes}"                    
                     SelectedValue="{Binding xBaseDados , Mode=TwoWay, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                     Grid.Column="1" Grid.ColumnSpan="2" Height="44" Margin="0,0,0,8" Style="{DynamicResource ListBox_CONEXOES}">

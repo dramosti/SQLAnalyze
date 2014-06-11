@@ -28,6 +28,8 @@ namespace HLP.SQLAnalyse.View
             this.WinPrincipal = WinPrincipal as Window;
             lbSelected.KeyDown += this.ViewModel.ListBox_KeyDown;
             lbSelected.SelectionChanged += this.ViewModel.lbSelected_SelectionChanged;
+            this.ViewModel.dgvFieldSecundary = this.dgvFieldSecundary;
+            this.ViewModel.dgvFieldPrimary = this.dgvFieldPrimary;
         }
         public AnalyzeViewModel ViewModel
         {

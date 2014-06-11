@@ -19,7 +19,6 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
         AnalyzeViewModel ViewModel { get; set; }
         BackgroundWorker bWorkerTables;
         BackgroundWorker bWorkerExecuteAnalyze;
-        BackgroundWorker bWorkerAnalyseTable;
         OperacoesSqlRepository operacao;
 
         public AnalyzeCommand(AnalyzeViewModel ViewModel)
@@ -66,8 +65,6 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
         }
 
         #region Commands
-
-
 
         public void AddConexao()
         {
@@ -295,7 +292,7 @@ namespace HLP.SQLAnalyse.ViewModel.Commands
 
                     if (ds.Tables.Count > 0)
                     {
-                        this.ViewModel.bases = new System.Collections.ObjectModel.ObservableCollection<string>(ds.Tables[0].AsEnumerable().Select(c => c["name"].ToString()).ToList());
+                        this.ViewModel.bases = new System.Collections.ObjectModel.ObservableCollection<string>(ds.Tables[0].AsEnumerable().Where(c=>c["name"].ToString().ToUpper().Contains("MAGNI")).Select(c => c["name"].ToString()).ToList());
                     }
                     else
                     {

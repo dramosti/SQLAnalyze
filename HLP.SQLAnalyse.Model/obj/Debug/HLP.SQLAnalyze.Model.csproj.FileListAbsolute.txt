@@ -31,6 +31,7 @@ D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.Model\bin\Debug\Common.Logging.dll
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.Model\bin\Debug\Microsoft.Practices.Unity.Interception.dll
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.Model\bin\Debug\HLP.Base.pdb
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.Model\bin\Debug\HLP.Report.View.WPF.pdb
-D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.Model\obj\Debug\HLP.SQLAnalyze.Model.csprojResolveAssemblyReference.cache
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.Model\obj\Debug\HLP.SQLAnalyse.Model.dll
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.Model\obj\Debug\HLP.SQLAnalyse.Model.pdb
+D:\GitHub\HLP\SQLAnalyze\bin\HLP.SQLAnalyse.Model.dll
+D:\GitHub\HLP\SQLAnalyze\bin\HLP.SQLAnalyse.Model.pdb

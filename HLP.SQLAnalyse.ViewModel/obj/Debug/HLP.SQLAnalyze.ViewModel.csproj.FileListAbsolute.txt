@@ -38,3 +38,5 @@ D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.ViewModel\bin\Debug\HLP.Report.View.WPF.
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.ViewModel\obj\Debug\HLP.SQLAnalyze.ViewModel.csprojResolveAssemblyReference.cache
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.ViewModel\obj\Debug\HLP.SQLAnalyse.ViewModel.dll
 D:\GitHub\HLP\SQLAnalyze\HLP.SQLAnalyse.ViewModel\obj\Debug\HLP.SQLAnalyse.ViewModel.pdb
+D:\GitHub\HLP\SQLAnalyze\bin\HLP.SQLAnalyse.ViewModel.dll
+D:\GitHub\HLP\SQLAnalyze\bin\HLP.SQLAnalyse.ViewModel.pdb

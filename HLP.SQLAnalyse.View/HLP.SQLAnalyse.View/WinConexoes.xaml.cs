@@ -26,6 +26,7 @@ namespace HLP.SQLAnalyse.View
             InitializeComponent();
             this.ViewModel = new AnalyzeViewModel();
             txtPassword.LostFocus += txtPassword_LostFocus;
+            lbServidores.KeyDown += this.ViewModel.lbServidores_KeyDown;
         }
 
         public void txtPassword_LostFocus(object sender, RoutedEventArgs e)

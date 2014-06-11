@@ -14,6 +14,9 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
 {
     public class AnalyzeViewModel : ViewModelBase<AnalyzeTableModel>
     {
+        public DataGrid dgvFieldSecundary { get; set; }
+        public DataGrid dgvFieldPrimary { get; set; }
+
         public ICommand FecharCommand { get; set; }
         public ICommand MinimizeCommand { get; set; }
 
@@ -26,6 +29,7 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
         public ICommand SelectAllCommand { get; set; }
         public ICommand FindTableCommand { get; set; }
         public string tpAnalyze { get; set; }
+
         private string _xBasePrincipal;
         public string xBasePrincipal
         {
@@ -68,6 +72,66 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
                 base.NotifyPropertyChanged(propertyName: "bisChecked");
             }
         }
+
+
+
+        private int _indexPrincipal;
+        public int indexPrincipal
+        {
+            get { return _indexPrincipal; }
+            set
+            {
+                _indexPrincipal = value;
+                base.NotifyPropertyChanged(propertyName: "indexPrincipal");
+            }
+        }
+
+
+
+        private FieldModel _currentFieldPrincipal;
+        public FieldModel currentFieldPrincipal
+        {
+            get { return _currentFieldPrincipal; }
+            set
+            {
+                _currentFieldPrincipal = value;
+                base.NotifyPropertyChanged(propertyName: "currentFieldPrincipal");
+                if (value != null)
+                {
+                    FieldModel f = this.currentModel.currentTableSecundary.lField.FirstOrDefault(C => C.xField == value.xField);
+                    if (f != null)
+                        if (this.currentFieldSecundary != f)
+                        {
+                            this.dgvFieldSecundary.ScrollIntoView(f);
+                            this.currentFieldSecundary = f;
+                        }
+                }
+            }
+        }
+
+
+        private FieldModel _currentFieldSecundary;
+        public FieldModel currentFieldSecundary
+        {
+            get { return _currentFieldSecundary; }
+            set
+            {
+
+                _currentFieldSecundary = value;
+                base.NotifyPropertyChanged(propertyName: "currentFieldSecundary");
+                if (value != null)
+                {
+                    FieldModel f = this.currentModel.currentTablePrincipal.lField.FirstOrDefault(C => C.xField == value.xField);
+                    if (f != null)
+                        if (this.currentFieldPrincipal != f)
+                        {
+                            this.dgvFieldPrimary.ScrollIntoView(f);
+                            this.currentFieldPrincipal = f;
+                        }
+                }
+            }
+        }
+
 
         private ConnectionConfigModel _currentConexao = new ConnectionConfigModel();
         public ConnectionConfigModel currentConexao
@@ -115,6 +179,18 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
                 }
             }
         }
+        public void lbServidores_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete)
+            {
+                if (this.bases.Count() > 0)
+                {
+                    string s = (sender as ListBox).SelectedItem.ToString();
+                    ConnectionConfigModel item = ((sender as ListBox).SelectedItem) as ConnectionConfigModel;
+                    this.currentModel.conexoes.Remove(item);
+                }
+            }
+        }
 
         public void lbSelected_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -159,6 +235,8 @@ namespace HLP.SQLAnalyse.ViewModel.ViewModels
                 }
             }
         }
+
+
 
     }
 }

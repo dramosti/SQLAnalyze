@@ -13,6 +13,10 @@ namespace HLP.SQLAnalyse.Model
         {
         }
 
+        public string xTable { get; set; }
+        public string xBase { get; set; }
+
+
         private string _xField;
         public string xField
         {
@@ -23,7 +27,6 @@ namespace HLP.SQLAnalyse.Model
                 base.NotifyPropertyChanged(propertyName: "xField");
             }
         }
-
 
         private string _xTipo;
         public string xTipo
@@ -36,27 +39,6 @@ namespace HLP.SQLAnalyse.Model
             }
         }
 
-        public void SetxTipo()
-        {
-            switch (this.xTypeName.ToUpper())
-            {
-                case "INT":
-                case "INT IDENTITY":
-                    {
-                        this.xTipo = "int";
-                    } break;
-                case "DECIMAL": this.xTipo = string.Format("DECIMAL ({0},{1})", this.xPrecisao, this.xCasasDecimais); break;
-                case "VARCHAR": this.xTipo = string.Format("VARCHAR ({0})", this.xTamanho); break;
-                case "DATE": this.xTipo = "DATE"; break;
-                case "BIT": this.xTipo = "BIT"; break;
-                case "TINYINT": this.xTipo = "TINYINT"; break;
-                case "TIME": this.xTipo = "TIME"; break;
-                case "IMAGE": this.xTipo = "IMAGE"; break;
-                case "DATETIME": this.xTipo = "DATETIME"; break;
-                default: this.xTipo = ""; break;
-            }
-
-        }
 
         private string _xTypeName;
         public string xTypeName
@@ -64,7 +46,6 @@ namespace HLP.SQLAnalyse.Model
             get { return _xTypeName; }
             set { _xTypeName = value; }
         }
-
 
         private string _xTamanho;
         public string xTamanho
@@ -108,6 +89,75 @@ namespace HLP.SQLAnalyse.Model
                 base.NotifyPropertyChanged(propertyName: "posicao");
             }
         }
+
+        private string _xResult = string.Empty;
+        public string xResult
+        {
+            get { return _xResult; }
+            set
+            {
+                _xResult = value;
+                base.NotifyPropertyChanged(propertyName: "xResult");
+            }
+        }
+
+        public void SetxTipo()
+        {
+            switch (this.xTypeName.ToUpper())
+            {
+                case "INT":
+                case "INT IDENTITY":
+                    {
+                        this.xTipo = "int";
+                    } break;
+                case "DECIMAL": this.xTipo = string.Format("DECIMAL ({0},{1})", this.xPrecisao, this.xCasasDecimais); break;
+                case "VARCHAR": this.xTipo = string.Format("VARCHAR ({0})", this.xTamanho); break;
+                case "DATE": this.xTipo = "DATE"; break;
+                case "BIT": this.xTipo = "BIT"; break;
+                case "TINYINT": this.xTipo = "TINYINT"; break;
+                case "TIME": this.xTipo = "TIME"; break;
+                case "IMAGE": this.xTipo = "IMAGE"; break;
+                case "DATETIME": this.xTipo = "DATETIME"; break;
+                default: this.xTipo = ""; break;
+            }
+
+        }
+        public void SetxResult()
+        {
+            try
+            {
+                if (!bxField)
+                {
+                    this.xResult = string.Format("O campo {0} não foi encontrado na Tabela {1} da Base de dados {2}.", this.xField, this.xTable, this.xBase);
+                }
+                else
+                {
+
+                    if (!this.bxTipo)
+                    {
+                        this.xResult = string.Format("Tipo {0} do campo {1} está irregular.", this.xTipo, this.xField);
+                    }
+                    if (!this.bisNotNull)
+                    {
+                        this.xResult += (this.xResult == "" ? "" : Environment.NewLine) + string.Format("Is not null do campo {0} está irregular.", this.xField);
+                    }
+                    if (!this.bPosicao)
+                    {
+                        this.xResult += (this.xResult == "" ? "" : Environment.NewLine) + string.Format("Posição {0} do campo {1} está irregular.", this.posicao, this.xField);
+                    }
+                }
+                if (this.xResult == "")
+                {
+                    this.xResult = "Nenhuma irregularidade encontrada.";
+                }
+            }
+            catch (Exception ex)
+            {                
+                throw ex;
+            }        
+        }
+
+
 
         #region Validacao
 
@@ -159,10 +209,10 @@ namespace HLP.SQLAnalyse.Model
 
         public bool wasAnalyze
         {
-            get { return _wasAnalyze ; }
-            set { _wasAnalyze  = value; }
+            get { return _wasAnalyze; }
+            set { _wasAnalyze = value; }
         }
-        
+
 
         #endregion
 
